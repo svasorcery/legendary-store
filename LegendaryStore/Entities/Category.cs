@@ -1,11 +1,11 @@
 ﻿namespace LegendaryStore.Entities
 {
-    public class ProductCategory
+    public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
         public int? ParentId { get; set; }
-        public ProductCategory Parent { get; set; }
+        public Category Parent { get; set; }
     }
 }
