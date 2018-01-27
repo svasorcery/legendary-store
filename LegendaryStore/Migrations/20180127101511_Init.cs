@@ -15,7 +15,7 @@ namespace LegendaryStore.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 25, nullable: false),
                     ParentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -36,10 +36,11 @@ namespace LegendaryStore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CategoryId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(maxLength: 250, nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
+                    Quantity = table.Column<int>(nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {

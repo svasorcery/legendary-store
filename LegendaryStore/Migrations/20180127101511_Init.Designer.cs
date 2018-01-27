@@ -11,7 +11,7 @@ using System;
 namespace LegendaryStore.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20180125200318_Init")]
+    [Migration("20180127101511_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +26,9 @@ namespace LegendaryStore.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25);
 
                     b.Property<int?>("ParentId");
 
@@ -44,13 +46,20 @@ namespace LegendaryStore.Migrations
 
                     b.Property<int>("CategoryId");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(250);
+
                     b.Property<string>("ImageUrl");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<decimal>("Price");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -62,14 +71,14 @@ namespace LegendaryStore.Migrations
             modelBuilder.Entity("LegendaryStore.Entities.Category", b =>
                 {
                     b.HasOne("LegendaryStore.Entities.Category", "Parent")
-                        .WithMany()
+                        .WithMany("Children")
                         .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("LegendaryStore.Entities.Product", b =>
                 {
                     b.HasOne("LegendaryStore.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
