@@ -2,20 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SpinnerComponent } from './spinner.component';
+import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component';
 
 @NgModule({
     imports: [
         CommonModule
     ],
     declarations: [
-        SpinnerComponent
+        SpinnerComponent,
+        TreeMenuItemComponent,
+        TreeMenuComponent
     ],
     providers: [
 
     ],
     exports: [
         CommonModule,
-        SpinnerComponent
+        SpinnerComponent,
+        TreeMenuItemComponent,
+        TreeMenuComponent
     ],
 })
 export class SharedModule {
