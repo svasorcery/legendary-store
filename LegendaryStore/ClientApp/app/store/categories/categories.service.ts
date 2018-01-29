@@ -20,7 +20,7 @@ export class CategoriesService {
     
     public getCategoriesMenuTree(): Observable<CategoryMenuItem[]> {
         return this._http.get(this._url)
-            .delay(3000) // emulate remote server data fetching latency
+            .delay(1000) // emulate remote server data fetching latency
             .map((response: Response) => response.json() as CategoryMenuItem[])
     }
 }

@@ -21,6 +21,7 @@ export class ProductsService {
     
     public getProducts(categoryId: number): Observable<Product[]> {
         return this._http.get(`${this._url}/by-category/${categoryId}`)
+            .delay(1000) // emulate remote server data fetching latency
             .map((response: Response) => response.json() as Product[])
     }
 }
