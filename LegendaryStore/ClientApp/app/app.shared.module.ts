@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule, appComponents } from './app.routing';
 import { SharedModule } from './shared/shared.module';
+import { StoreModule } from './store/store.module';
 
 @NgModule({
     imports: [
         SharedModule,
         HttpModule,
         FormsModule,
+        StoreModule,
         AppRoutingModule
     ],
     declarations: [
