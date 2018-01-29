@@ -24,7 +24,7 @@ namespace LegendaryStore.Services
 
         public Task<int> CreateCategoryAsync(Category model)
         {
-            _storeDb.Add(model);
+            _storeDb.Categories.Add(model);
 
             return _storeDb.SaveChangesAsync();
         }
@@ -36,18 +36,18 @@ namespace LegendaryStore.Services
             update.Name = model.Name;
             update.ParentId = model.ParentId;
 
-            _storeDb.Update(update);
+            _storeDb.Categories.Update(update);
             await _storeDb.SaveChangesAsync();
 
             return model;
         }
 
-        public Task RemoveCategoryAsync(int id)
+        public async Task RemoveCategoryAsync(int id)
         {
-            var remove = GetCategoryAsync(id);
+            var remove = await GetCategoryAsync(id);
 
-            _storeDb.Remove(remove);
-            return _storeDb.SaveChangesAsync();
+            _storeDb.Categories.Remove(remove);
+            await _storeDb.SaveChangesAsync();
         }
 
 
