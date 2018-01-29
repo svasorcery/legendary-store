@@ -18,10 +18,10 @@ namespace LegendaryStore.DbContexts
         {
             builder.Entity<Product>().Property(b => b.Name)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(200);
 
             builder.Entity<Product>().Property(b => b.Description)
-                .HasMaxLength(250);
+                .HasMaxLength(500);
 
             builder.Entity<Product>().Property(b => b.Quantity)
                 .HasDefaultValue(0);

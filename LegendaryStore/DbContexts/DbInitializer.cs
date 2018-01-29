@@ -35,7 +35,15 @@ namespace LegendaryStore.DbContexts
 
             var products = new Product[]
             {
-
+                new Product { Name = "Steve McConnell \"Code Complete: A Practical Handbook of Software Construction\"", CategoryId = 3, Quantity = 7, Price = 29.97m, Description = "" },
+                new Product { Name = "Herbert Schildt \"C# 4.0 The Complete Reference\"", CategoryId = 8, Quantity = 2, Price = 29.41m, Description = "" },
+                new Product { Name = "Jeffrey Richter \"CLR via C# 5.0 and .NET Framework 4.5\"", CategoryId = 8, Quantity = 5, Price = 32.66m, Description = "" },
+                new Product { Name = "Andrew Troelsen \"C# 6.0 and the .NET 4.6 Framework\"", CategoryId = 8, Quantity = 3, Price = 27.98m, Description = "" },
+                new Product { Name = "Joseph Albahari \"C# 7.0 in a Nutshell: The Definitive Reference\"", CategoryId = 8, Quantity = 7, Price = 62.50m, Description = "" },
+                new Product { Name = "James R. Groff \"SQL: The Complete Reference\"", CategoryId = 5, Quantity = 10, Price = 30.29m, Description = "" },
+                new Product { Name = "C.J. Date \"An Introduction to Database Systems\"", CategoryId = 5, Quantity = 6, Price = 46.01m, Description = "" },
+                new Product { Name = "Kyle Simpson \"You Don't Know JS\"", CategoryId = 10, Quantity = 15, Price = 13.67m, Description = "" },
+                new Product { Name = "John Resig \"Secrets of the JavaScript Ninja\"", CategoryId = 10, Quantity = 12, Price = 25.56m, Description = "" },
             };
 
             context.Products.AddRange(products);
