@@ -26,10 +26,12 @@ export class TreeMenuComponent {
 @Component({
     selector: 'tree-menu-item',
     template: `
-        {{ item.name }}
+        <a [routerLink]="item.id">{{ item.name }}</a>
         <ul *ngIf="item.children">
             <li *ngFor="let child of item.children">
-                <tree-menu-item [item]="child"></tree-menu-item>
+                <tree-menu-item 
+                    [item]="child">
+                </tree-menu-item>
             </li>
         </ul>
     `
