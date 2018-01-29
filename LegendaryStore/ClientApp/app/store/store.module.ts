@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { StoreRoutingModule, storeComponents } from './store.routing';
 import { CategoriesService } from './categories/categories.service';
+import { ProductsService } from './products/products.service';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CategoriesService } from './categories/categories.service';
         ...storeComponents
     ],
     providers: [
-        CategoriesService
+        CategoriesService,
+        ProductsService
     ],
     exports: [
         ...storeComponents
