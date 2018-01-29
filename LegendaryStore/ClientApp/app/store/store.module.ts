@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { SharedModule } from '../shared/shared.module';
 
 import { StoreRoutingModule, storeComponents } from './store.routing';
+import { CategoriesService } from './categories/categories.service';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { StoreRoutingModule, storeComponents } from './store.routing';
         ...storeComponents
     ],
     providers: [
-
+        CategoriesService
     ],
     exports: [
         ...storeComponents
