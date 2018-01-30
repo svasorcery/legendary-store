@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -10,6 +11,8 @@ import { ProductsService } from './products/products.service';
 
 @NgModule({
     imports: [
+        HttpModule,
+        FormsModule,
         SharedModule,
         StoreRoutingModule
     ],
