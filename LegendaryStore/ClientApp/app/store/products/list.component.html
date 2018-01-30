@@ -30,4 +30,12 @@
             <td>{{ p.quantity }}</td>
         </tr>
     </tbody>
-</table>   
+</table>
+
+<div aria-label="Page navigation" style="text-align:center">
+    <ul class="pagination" *ngIf="paging" style="cursor:pointer">
+        <li *ngFor="let pageNum of paging.pages" [ngClass]="{ active: pageNum === paging.page }">
+            <a [routerLink]="[]" [queryParams]="{ page: pageNum }">{{ pageNum }}</a>
+        </li>
+    </ul>
+</div>

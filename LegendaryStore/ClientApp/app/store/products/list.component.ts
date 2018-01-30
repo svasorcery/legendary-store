@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Product } from '../store.models';
+import { ProductsList, Product, Paging } from '../store.models';
 import { ProductsService } from './products.service';
 
 @Component({
@@ -11,27 +11,42 @@ import { ProductsService } from './products.service';
 
 export class ProductsListComponent implements OnInit {
     items: Product[];
+    categoryId: number;
+    paging: Paging;
+    sortBy: string = null;
 
     constructor(
         private _products: ProductsService,
-        private _route: ActivatedRoute
+        private _router: Router,
+        private _route: ActivatedRoute,
     ) { }
 
     ngOnInit() { 
         this._route
             .params        
-            .switchMap((params: Params) => this._products.getProducts(+params['id']))
+            .switchMap((params: Params) => {
+                this.categoryId = +params['id'];
+                var page: number;
+                this._route.queryParams.subscribe(queryParams => page = +queryParams['page']);
+                return this._products.getProducts(this.categoryId, page);
+            })
             .subscribe(
-                result => this.items = result,
+                result => {
+                    this.items = result.items;
+                    this.paging = result.paging ? 
+                        Paging.getPaging(result.paging) : 
+                        new Paging(1, result.items.length, 10);
+                },
                 error => console.log(error)
             );
     }
 
-    /* sorting */
+    public sort(kind: string) {
+        this.items.sort(this.sortFn[kind]);
+        this.sortBy = kind;
+    }
 
-    orderBy: string = null;
-
-    sortFn = {
+    private sortFn = {
         name: function(a: Product, b: Product) {
             return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
         },
@@ -39,9 +54,4 @@ export class ProductsListComponent implements OnInit {
             return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
         }
     };
-
-    sort(kind: string) {
-        this.items.sort(this.sortFn[kind]);
-        this.orderBy = kind;
-    }
 }
