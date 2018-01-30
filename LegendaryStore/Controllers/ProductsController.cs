@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LegendaryStore.Controllers
 {
     using LegendaryStore.Entities;
+    using LegendaryStore.Models;
     using LegendaryStore.Services;
     
     [Route("api/[controller]")]
@@ -27,11 +28,26 @@ namespace LegendaryStore.Controllers
         }
 
         [HttpGet("by-category/{categoryId:int}")]
-        public async Task<IActionResult> ByCategory([FromRoute]int categoryId)
+        public async Task<IActionResult> ByCategory([FromRoute]int categoryId, int page = 1)
         {
-            var items = await _db.GetProductsAsync(categoryId);
+            const int itemsPerPage = 2;
 
-            return Ok(items);
+            var items = await _db.GetProductsAsync(categoryId, page, itemsPerPage);
+            var totalCount = await _db.GetProductsCountAsync(categoryId);
+
+            var result = new ProductsList
+            {
+                Items = items,
+                Paging = new Paging
+                {
+                    Page = page,
+                    TotalItems = totalCount,
+                    ItemsPerPage = itemsPerPage,
+                    TotalPages = (int)Math.Ceiling((double)totalCount / itemsPerPage)
+                }
+            };
+
+            return Ok(result);
         }
 
         [HttpGet("{id:int}")]

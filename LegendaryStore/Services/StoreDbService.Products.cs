@@ -20,10 +20,17 @@ namespace LegendaryStore.Services
                 .ToArrayAsync();
         }
 
-        public Task<Product[]> GetProductsAsync(int categoryId)
+        public Task<int> GetProductsCountAsync(int categoryId)
+            => _storeDb.Products.Where(x => x.CategoryId == categoryId).CountAsync();
+
+        public Task<Product[]> GetProductsAsync(int categoryId, int page, int itemsPerPage)
         {
+            var skip = itemsPerPage * (page - 1);
+
             return _storeDb.Products
                 .Where(x => x.CategoryId == categoryId)
+                .Skip(skip)
+                .Take(itemsPerPage)
                 .ToArrayAsync();
         }
 
