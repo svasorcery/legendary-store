@@ -18,6 +18,14 @@ namespace LegendaryStore.Controllers
         }
 
 
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery]string term)
+        {
+            var result = await _db.SearchProductsAsync(term);
+
+            return Ok(result);
+        }
+
         [HttpGet("by-category/{categoryId:int}")]
         public async Task<IActionResult> ByCategory([FromRoute]int categoryId)
         {

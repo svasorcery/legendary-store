@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LegendaryStore.Entities;
@@ -7,6 +8,18 @@ namespace LegendaryStore.Services
 {
     public partial class StoreDbService
     {
+        public Task<Product[]> SearchProductsAsync(string term)
+        {
+            if (String.IsNullOrEmpty(term))
+                return null;
+
+            term = term.Trim().ToUpper();
+
+            return _storeDb.Products
+                .Where(x => x.Name.ToUpper().Contains(term))
+                .ToArrayAsync();
+        }
+
         public Task<Product[]> GetProductsAsync(int categoryId)
         {
             return _storeDb.Products
