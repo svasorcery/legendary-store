@@ -7,13 +7,13 @@
             <th>
                 <a (click)="sort('name')" style="cursor:pointer">
                     Name
-                    <i *ngIf="orderBy=='name'" class="fa fa-arrow-down"></i>
+                    <i *ngIf="sortBy=='name'" class="fa fa-arrow-down"></i>
                 </a>
             </th>
             <th>
                 <a (click)="sort('price')" style="cursor:pointer">
                     Price
-                    <i *ngIf="orderBy=='price'" class="fa fa-arrow-down"></i>
+                    <i *ngIf="sortBy=='price'" class="fa fa-arrow-down"></i>
                 </a>
             </th>
             <th>Quantity</th>
