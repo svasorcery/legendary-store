@@ -49,6 +49,17 @@ export class ProductsService {
             .map((response: Response) => response.json() as Product);
     }
 
+    public deleteProduct(item: Product) {
+        return this._http.delete(`${this._url}/${item.id}`)
+            .subscribe(
+                result => {
+                    this.gotoList(item.categoryId);
+                    window.location.reload();
+                },
+                error => console.log(error)
+            );
+    } 
+
 
     public gotoList(categoryId: number): void {
         this._router.navigate(['store', 'categories', categoryId]);

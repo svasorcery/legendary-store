@@ -45,8 +45,16 @@ export class ProductsListComponent implements OnInit {
         this._products.gotoCreate(this.categoryId);
     }
 
-    public edit(id: number): void {
+    public editItem(id: number): void {
         this._products.gotoEdit(this.categoryId, id);
+    }
+
+    public deleteItem(item: Product) {
+        if(!item) return;
+
+        if (confirm(`Вы действительно хотите удалить \'${item.name}\'?`)) { 
+            this._products.deleteProduct(item);
+        }
     }
 
 

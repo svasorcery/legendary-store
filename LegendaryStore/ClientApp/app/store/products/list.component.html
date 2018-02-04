@@ -22,10 +22,11 @@
                 </a>
             </th>
             <th>Quantity</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of items" (click)="edit(p.id)" style="cursor:pointer">
+        <tr *ngFor="let p of items" (click)="editItem(p.id)" style="cursor:pointer">
             <td><input type="checkbox" /></td>
             <td>
                 <img [src]="p.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
@@ -33,6 +34,9 @@
             </td>
             <td>{{ p.price | currency:'USD':true:'1.2-2' }}</td>
             <td>{{ p.quantity }}</td>
+            <td>
+                <i (click)="deleteItem(p)" class="fa fa-trash" style="cursor:pointer"></i>
+            </td>
         </tr>
     </tbody>
 </table>
