@@ -41,6 +41,11 @@ export class ProductsListComponent implements OnInit {
             );
     }
 
+    public edit(id: number): void {
+        this._products.gotoEdit(this.categoryId, id);
+    }
+
+
     public sort(kind: string) {
         this.items.sort(this.sortFn[kind]);
         this.sortBy = kind;

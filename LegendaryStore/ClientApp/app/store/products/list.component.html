@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of items">
+        <tr *ngFor="let p of items" (click)="edit(p.id)" style="cursor:pointer">
             <td><input type="checkbox" /></td>
             <td>
                 <img [src]="p.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
