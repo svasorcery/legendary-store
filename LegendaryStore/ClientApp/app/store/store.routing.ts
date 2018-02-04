@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StoreComponent } from './store.component';
 import { CategoriesTreeComponent } from './categories/tree.component';
 import { ProductsListComponent } from './products/list.component';
+import { ProductFormComponent } from './products/form.component';
 import { ProductEditComponent } from './products/edit.component';
 
 const routes: Routes = [
@@ -32,5 +33,6 @@ export const storeComponents = [
     StoreComponent,
     CategoriesTreeComponent,
     ProductsListComponent,
+    ProductFormComponent,
     ProductEditComponent
 ];

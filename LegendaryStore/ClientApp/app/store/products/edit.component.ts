@@ -6,7 +6,17 @@ import { ProductsService } from './products.service';
 
 @Component({
     selector: 'product-edit',
-    templateUrl: 'edit.component.html'
+    template: `
+        <spinner [active]="!value"></spinner>
+        <div *ngIf="value">
+            <h3>{{ value.name }}</h3>
+            <product-form 
+                [value]="value" 
+                (save)="submit($event)" 
+                (cancel)="cancel()">
+            </product-form>
+        </div>
+    `
 })
 
 export class ProductEditComponent {
