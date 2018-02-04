@@ -1,3 +1,8 @@
+<h3>
+    Products list
+    <button (click)="createItem()" class="btn btn-primary pull-right">Добавить</button>
+</h3>
+
 <spinner [active]="!items"></spinner>
 
 <table *ngIf="items" class="table table-striped table-hover">

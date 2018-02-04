@@ -39,6 +39,11 @@ export class ProductsService {
             .map((response: Response) => response.json() as Product);
     }
 
+    public postProduct(value: Product): Observable<Product> {
+        return this._http.post(`${this._url}`, value)
+            .map((response: Response) => response.json() as Product);
+    }
+
     public putProduct(id: number, value: Product): Observable<Product> {
         return this._http.put(`${this._url}/${id}`, value)
             .map((response: Response) => response.json() as Product);
@@ -51,6 +56,10 @@ export class ProductsService {
 
     public gotoEdit(categoryId: number, itemId: number): void {
         this._router.navigate(['store', 'categories', categoryId, 'products', itemId, 'edit']);
+    }
+
+    public gotoCreate(categoryId: number): void {
+        this._router.navigate(['store', 'categories', categoryId, 'products', 'create']);
     }
 }
 

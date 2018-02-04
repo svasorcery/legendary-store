@@ -25,7 +25,7 @@ export class ProductsListComponent implements OnInit {
         this._route
             .params        
             .switchMap((params: Params) => {
-                this.categoryId = +params['id'];
+                this.categoryId = +params['categoryId'];
                 var page: number;
                 this._route.queryParams.subscribe(queryParams => page = +queryParams['page']);
                 return this._products.getProducts(this.categoryId, page);
@@ -39,6 +39,10 @@ export class ProductsListComponent implements OnInit {
                 },
                 error => console.log(error)
             );
+    }
+
+    public createItem() {
+        this._products.gotoCreate(this.categoryId);
     }
 
     public edit(id: number): void {

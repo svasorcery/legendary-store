@@ -6,6 +6,7 @@ import { CategoriesTreeComponent } from './categories/tree.component';
 import { ProductsListComponent } from './products/list.component';
 import { ProductFormComponent } from './products/form.component';
 import { ProductEditComponent } from './products/edit.component';
+import { ProductCreateComponent } from './products/create.component';
 
 const routes: Routes = [
     { 
@@ -13,7 +14,8 @@ const routes: Routes = [
         component: StoreComponent,
         children: [
             { path: 'categories', component: CategoriesTreeComponent },
-            { path: 'categories/:id', component: ProductsListComponent },
+            { path: 'categories/:categoryId', component: ProductsListComponent },
+            { path: 'categories/:categoryId/products/create', component: ProductCreateComponent },
             { path: 'categories/:categoryId/products/:id/edit', component: ProductEditComponent }
         ]
     },
@@ -27,12 +29,15 @@ const routes: Routes = [
         RouterModule
     ],
 })
-export class StoreRoutingModule { }
+export class StoreRoutingModule { 
+    
+}
 
 export const storeComponents = [
     StoreComponent,
     CategoriesTreeComponent,
     ProductsListComponent,
     ProductFormComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    ProductCreateComponent
 ];
