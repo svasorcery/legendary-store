@@ -5,6 +5,7 @@ import { ProductsService } from './products.service';
 import { Product } from '../store.models';
 
 @Component({
+    selector: 'product-create',
     template: `
         <h3>New product</h3>
         <product-form 

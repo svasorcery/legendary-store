@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Product } from '../store.models';
@@ -19,7 +19,7 @@ import { ProductsService } from './products.service';
     `
 })
 
-export class ProductEditComponent {
+export class ProductEditComponent implements OnInit {
     value: Product;
 
     constructor(
