@@ -26,9 +26,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of items" (click)="editItem(p.id)" style="cursor:pointer">
+        <tr *ngFor="let p of items" style="cursor:pointer">
             <td><input type="checkbox" /></td>
-            <td>
+            <td (click)="editItem(p.id)">
                 <img [src]="p.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
                 {{ p.name }}
             </td>
