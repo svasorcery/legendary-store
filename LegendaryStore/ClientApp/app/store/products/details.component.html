@@ -1,0 +1,15 @@
+<div *ngIf="value" class="well">
+    <div class="col-md-2">
+        <img [src]="value.imageUrl" alt="Photo" class="img-responsive img-rounded" />
+    </div>
+    <div class="col-md-8">
+        <h3>{{ value.name }}</h3>
+        <p>{{ value.description }}</p>
+    </div>
+    <div class="col-md-2 text-right">
+        <h4 class="text-info">
+            {{ value.price | currency:'USD':true}}
+        </h4>
+    </div>
+    <div class="clearfix"></div>
+</div>

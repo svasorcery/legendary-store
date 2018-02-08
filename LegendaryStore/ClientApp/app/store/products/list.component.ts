@@ -41,6 +41,10 @@ export class ProductsListComponent implements OnInit {
             );
     }
 
+    public selectItem(id: number) {
+        this._products.gotoItem(this.categoryId, id);
+    }
+
     public createItem() {
         this._products.gotoCreate(this.categoryId);
     }

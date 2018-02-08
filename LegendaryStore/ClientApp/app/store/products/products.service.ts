@@ -65,6 +65,10 @@ export class ProductsService {
         this._router.navigate(['store', 'categories', categoryId]);
     }
 
+    public gotoItem(categoryId: number, itemId: number): void {
+        this._router.navigate(['store', 'categories', categoryId, 'products', itemId]);
+    }
+
     public gotoEdit(categoryId: number, itemId: number): void {
         this._router.navigate(['store', 'categories', categoryId, 'products', itemId, 'edit']);
     }
