@@ -23,6 +23,21 @@ namespace LegendaryStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                    .AddAuthentication(DevelopmentAuthentication.DevelopmentAuthenticationDefaults.AuthenticationScheme)
+                    .AddDevelopment(new DevelopmentUser
+                    {
+                        Username = "developer",
+                        Password = "zxasqw12",
+                        Roles = new string[] { "IT" },
+                        Subject = "S-0-0-00-0000000000-0000000000-0000000000-0000"
+                    });
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("DevelopmentAccess", policy => policy.RequireRole("Developer"));
+            //});
+
             services.AddMvc();
             
             services.AddDbContext<DbContexts.StoreDbContext>(options => 
@@ -46,6 +61,8 @@ namespace LegendaryStore
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 
