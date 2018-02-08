@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Product } from '../store.models';
@@ -10,7 +10,7 @@ import { ProductsService } from './products.service';
 })
 
 export class ProductDetsilsComponent implements OnInit {
-    value: Product;
+    @Input() value: Product;
 
     constructor(
         private _products: ProductsService,
@@ -18,12 +18,14 @@ export class ProductDetsilsComponent implements OnInit {
     ) { }
         
     ngOnInit() { 
-        this._route
-            .params
-            .switchMap((params: Params) => this._products.getProduct(+params['id']))
-            .subscribe(
-                result => this.value = result,
-                error => console.log(error)
-            );
+        if (!this.value) {
+            this._route
+                .params
+                .switchMap((params: Params) => this._products.getProduct(+params['id']))
+                .subscribe(
+                    result => this.value = result,
+                    error => console.log(error)
+                );
+        }
     }
 }
