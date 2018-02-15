@@ -10,6 +10,11 @@
             <a class='navbar-brand' [routerLink]="['/home']">Legendary Store</a>
         </div>
         <div class='clearfix'></div>
+        <div *ngIf="userInfo" style="color:lightgrey">
+            <img [attr.src]="userInfo.avatarUrl" width="50px" alt="User Image" class="img-circle pull-left" style="margin:5px 15px">
+            <div><strong>{{ userInfo.userName.toUpperCase() }}</strong></div>
+        </div>
+        <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
