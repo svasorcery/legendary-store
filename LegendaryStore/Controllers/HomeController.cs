@@ -1,17 +1,31 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LegendaryStore.Controllers
 {
+    using LegendaryStore.Abstractions;
+
     public class HomeController : Controller
     {
+        private readonly IUserService _userService;
+
+        public HomeController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpGet("api/who-am-i")]
+        public IActionResult WhoAmI()
+        {
+            return new JsonResult(_userService.GetUserInfo());
         }
 
         public IActionResult Error()

@@ -44,6 +44,7 @@ namespace LegendaryStore
                 options.UseSqlServer(Configuration.GetConnectionString("LegendaryStoreDatabase")));
 
             services.AddScoped<Services.StoreDbService>();
+            services.AddSingleton<Abstractions.IUserService, Services.DevelopmentUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
