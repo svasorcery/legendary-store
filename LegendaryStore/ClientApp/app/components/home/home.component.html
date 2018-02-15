@@ -1,4 +1,7 @@
-<h1>Hello, %username%!</h1>
+<h1>Hello, 
+    <span *ngIf="!userInfo">%username%</span>
+    <span *ngIf="userInfo">{{ userInfo.userName }}</span>!
+</h1>
 
 <div class="form-group">
     <label class="control-label col-md-offset-1 col-md-2 text-right">
