@@ -51,6 +51,18 @@ namespace LegendaryStore.Services
         }
 
 
+        public Task<CategoryListItem[]> GetTopLevelCategoriesAsync()
+        {
+            return _storeDb.Categories
+                .Where(x => x.ParentId == null)
+                .Select(x => new CategoryListItem
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToArrayAsync();
+        }
+
         public async Task<IEnumerable<CategoryMenuItem>> GetCategoriesMenuTreeAsync()
         {
             var items = await GetCategoriesAsync();
