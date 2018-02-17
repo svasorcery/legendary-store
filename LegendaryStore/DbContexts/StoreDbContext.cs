@@ -12,6 +12,7 @@ namespace LegendaryStore.DbContexts
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
