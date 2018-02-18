@@ -52,3 +52,12 @@ export class Paging {
         return result;
     }
 }
+
+export class CartItem {
+    id: number;
+    quantity: number;
+    pricePerUnit: number;
+    priceCalculatedAt: number;
+    productId: number;
+    product: Product;
+}
