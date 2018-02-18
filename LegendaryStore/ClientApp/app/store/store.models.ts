@@ -54,10 +54,16 @@ export class Paging {
 }
 
 export class CartItem {
-    id: number;
-    quantity: number;
-    pricePerUnit: number;
-    priceCalculatedAt: number;
-    productId: number;
-    product: Product;
+    constructor(
+        public id: number,
+        public productId: number,
+        public product: Product,
+        public quantity: number,
+        public pricePerUnit: number,
+        public priceCalculatedAt: number
+    ) { }
+    
+    public get priceTotal(): number {
+        return this.quantity * this.pricePerUnit;
+    }
 }
