@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { SpinnerComponent } from './spinner.component';
 import { AutoCompleteComponent } from './autocomplete.component';
 import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component';
+import { ModalComponent } from './modal.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component'
         SpinnerComponent,
         AutoCompleteComponent,
         TreeMenuItemComponent,
-        TreeMenuComponent
+        TreeMenuComponent,
+        ModalComponent
     ],
     providers: [
 
@@ -27,7 +29,8 @@ import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component'
         SpinnerComponent,
         AutoCompleteComponent,
         TreeMenuItemComponent,
-        TreeMenuComponent
+        TreeMenuComponent,
+        ModalComponent
     ],
 })
 export class SharedModule {
