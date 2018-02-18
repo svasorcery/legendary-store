@@ -25,7 +25,7 @@ namespace LegendaryStore.Controllers
             return Ok(cart);
         }
 
-        [HttpGet("{productId:int}")]
+        [HttpGet("add/{productId:int}")]
         public async Task<IActionResult> Add(int productId)
         {
             var product = await _db.GetProductAsync(productId);
@@ -40,7 +40,7 @@ namespace LegendaryStore.Controllers
             return Ok(item);
         }
 
-        [HttpGet("{productId:int}")]
+        [HttpGet("remove/{productId:int}")]
         public async Task<IActionResult> Remove(int productId)
         {
             var item = await _db.GetCarItemAsync(productId);
