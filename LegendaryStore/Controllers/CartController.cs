@@ -26,7 +26,7 @@ namespace LegendaryStore.Controllers
         }
 
         [HttpGet("add/{productId:int}")]
-        public async Task<IActionResult> Add(int productId)
+        public async Task<IActionResult> Add([FromRoute]int productId)
         {
             var product = await _db.GetProductAsync(productId);
 
@@ -41,7 +41,7 @@ namespace LegendaryStore.Controllers
         }
 
         [HttpGet("remove/{productId:int}")]
-        public async Task<IActionResult> Remove(int productId)
+        public async Task<IActionResult> Remove([FromRoute]int productId)
         {
             var item = await _db.GetCarItemAsync(productId);
 
