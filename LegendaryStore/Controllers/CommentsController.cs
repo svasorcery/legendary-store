@@ -44,5 +44,20 @@ namespace LegendaryStore.Controllers
 
             return Ok(product);
         }
+
+        [HttpDelete("{id:long}")]
+        public async Task<IActionResult> Delete([FromRoute]long id)
+        {
+            try
+            {
+                await _db.DeleteCommentAsync(id);
+
+                return Ok(new { deleted = true });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }
