@@ -1,3 +1,5 @@
+<spinner [active]="!value"></spinner>
+
 <div *ngIf="value">
     <div class="well">
         <div class="col-md-2">
@@ -18,5 +20,5 @@
         <div class="clearfix"></div>
     </div>
 
-    <comments-list [items]="comments" *ngIf="comments"></comments-list>
+    <comments [productId]="value.id"></comments>
 </div>
