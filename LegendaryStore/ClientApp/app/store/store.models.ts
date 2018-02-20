@@ -27,6 +27,15 @@ export class ProductsList {
     paging: Paging;
 }
 
+export class Comment {
+    id: number;
+    productId: number;
+    content: string;
+    author: string;
+    postedAt: Date;
+    isDeleted: boolean;
+}
+
 export class Paging {
     public totalPages: number;
 
