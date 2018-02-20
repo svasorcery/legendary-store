@@ -29,14 +29,16 @@ namespace LegendaryStore.Services
                 .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
         }
 
-        public Task CreateCommentAsync(Comment model)
+        public async Task<Comment> CreateCommentAsync(Comment model)
         {
             model.Author = _userService.GetUserName();
             model.PostedAt = DateTime.UtcNow;
             model.IsDeleted = false;
 
-            _storeDb.Add(model);
-            return _storeDb.SaveChangesAsync();
+            var comment = _storeDb.Add(model).Entity;
+            await _storeDb.SaveChangesAsync();
+
+            return comment;
         }
 
         public async Task UpdateCommentContentAsync(long id, string content)
