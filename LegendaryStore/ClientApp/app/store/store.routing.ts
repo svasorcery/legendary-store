@@ -8,6 +8,7 @@ import { ProductDetailsComponent } from './products/details.component';
 import { ProductFormComponent } from './products/form.component';
 import { ProductEditComponent } from './products/edit.component';
 import { ProductCreateComponent } from './products/create.component';
+import { CommentsListComponent } from './comments/list.component';
 import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
@@ -45,5 +46,6 @@ export const storeComponents = [
     ProductFormComponent,
     ProductEditComponent,
     ProductCreateComponent,
+    CommentsListComponent,
     CartComponent
 ];
