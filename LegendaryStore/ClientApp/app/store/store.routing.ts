@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from './products/details.component';
 import { ProductFormComponent } from './products/form.component';
 import { ProductEditComponent } from './products/edit.component';
 import { ProductCreateComponent } from './products/create.component';
+import { CommentsComponent } from './comments/comments.component';
 import { CommentsListComponent } from './comments/list.component';
 import { CommentCreateComponent } from './comments/create.component';
 
@@ -48,6 +49,7 @@ export const storeComponents = [
     ProductFormComponent,
     ProductEditComponent,
     ProductCreateComponent,
+    CommentsComponent,
     CommentsListComponent,
     CommentCreateComponent
 ];

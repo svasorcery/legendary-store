@@ -5,10 +5,8 @@ import { CommentsService } from './comments.service';
 
 @Component({
     selector: 'comments-list',
-    //templateUrl: 'tree.component.html'
     template: `
-        <h3>Comments ({{ items ? items.length : 0 }})</h3>
-        <div *ngIf="items" class="col-md-6">
+        <div *ngIf="items">
             <div *ngFor="let c of items" class="panel panel-default">
                 <div class="panel-heading">
                     <span><b>{{ c.author }}</b> at {{ c.postedAt | date:'yyyy-MM-dd HH:mm:ss' }}</span>

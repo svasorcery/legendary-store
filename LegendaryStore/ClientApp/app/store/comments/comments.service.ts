@@ -21,6 +21,11 @@ export class CommentsService {
     public getCommentsForProduct(productId: number): Observable<Comment[]> {
         return this._http.get(`${this._url}/${productId}`)
             .delay(1000) // emulate remote server data fetching latency
-            .map((response: Response) => response.json() as Comment[])
+            .map((response: Response) => response.json() as Comment[]);
+    }
+
+    public postComment(productId: number, content: string): Observable<Comment> {
+        return this._http.post(`${this._url}/${productId}`, { content: content })
+            .map((response: Response) => response.json() as Comment)
     }
 }
