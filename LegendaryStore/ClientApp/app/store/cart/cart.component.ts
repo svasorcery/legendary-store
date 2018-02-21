@@ -23,13 +23,16 @@ export class CartComponent implements OnInit {
 
     public removeItem(item: CartItem) {
         if (!item) return;
-        this._cart.removeItem(item.productId)
-            .subscribe(
-                result => {
-                    var index = this.items.indexOf(item);
-                    this.items.splice(index, 1);
-                },
-                error => console.log(error)
-            );
+
+        if (confirm(`Вы действительно хотите удалить \'${item.product.name}\'?`)) {
+            this._cart.removeItem(item.productId)
+                .subscribe(
+                    result => {
+                        var index = this.items.indexOf(item);
+                        this.items.splice(index, 1);
+                    },
+                    error => console.log(error)
+                );
+        }
     }
 }

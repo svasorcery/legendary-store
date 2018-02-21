@@ -23,13 +23,15 @@ export class FavoritesListComponent implements OnInit {
 
     public removeItem(item: Favorite) {
         if (!item) return;
-        this._favs.removeItem(item.productId)
-            .subscribe(
-                result => {
-                    var index = this.items.indexOf(item);
-                    this.items.splice(index, 1);
-                },
-                error => console.log(error)
-            );
+        if (confirm(`Вы действительно хотите удалить \'${item.product.name}\'?`)) {
+            this._favs.removeItem(item.productId)
+                .subscribe(
+                    result => {
+                        var index = this.items.indexOf(item);
+                        this.items.splice(index, 1);
+                    },
+                    error => console.log(error)
+                );
+        }
     }
 }
