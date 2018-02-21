@@ -43,4 +43,22 @@ export class ProductDetailsComponent implements OnInit {
                 error => console.log(error)
             );
     }
+
+    public addToFavorites() {
+        if (!this.value) return;
+        this._favs.addItem(this.value.product.id)
+            .subscribe(
+                result => this.value.isFavorite = true,
+                error => console.log(error)
+            );
+    }
+
+    public removeFromFavorites() {
+        if (!this.value) return;
+        this._favs.removeItem(this.value.product.id)
+            .subscribe(
+                result => this.value.isFavorite = false,
+                error => console.log(error)
+            );
+    }
 }
