@@ -55,7 +55,18 @@ namespace LegendaryStore.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
-            var model = await _db.GetProductAsync(id);
+            var product = await _db.GetProductAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ProductDetails
+            {
+                Product = product,
+                IsFavorite = await _db.IsFavoriteAsync(product.Id)
+            };
 
             return Ok(model);
         }
