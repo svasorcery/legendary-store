@@ -11,6 +11,7 @@ namespace LegendaryStore.Services
         public Task<Favorite[]> GetFavoritesAsync()
         {
             return _storeDb.Favorites
+                .Include(x => x.Product)
                 .Where(i => i.UserName == _userService.GetUserName())
                 .ToArrayAsync();
         }
@@ -20,6 +21,7 @@ namespace LegendaryStore.Services
             var userName = _userService.GetUserName();
 
             return _storeDb.Favorites
+                .Include(x => x.Product)
                 .SingleOrDefaultAsync(i => i.ProductId == productId
                                         && i.UserName == userName);
         }

@@ -17,6 +17,13 @@ namespace LegendaryStore.Controllers
             _db = dbService;
         }
 
+        
+        public async Task<IActionResult> Get()
+        {
+            var cart = await _db.GetFavoritesAsync();
+
+            return Ok(cart);
+        }
 
         [HttpGet("add/{productId:int}")]
         public async Task<IActionResult> Add([FromRoute]int productId)
