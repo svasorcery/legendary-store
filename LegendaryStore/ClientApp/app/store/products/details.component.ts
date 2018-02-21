@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Product } from '../store.models';
+import { Product, ProductDetails } from '../store.models';
 import { ProductsService } from './products.service';
 import { CartService } from '../cart/cart.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Component({
     selector: 'product-details',
@@ -11,11 +12,12 @@ import { CartService } from '../cart/cart.service';
 })
 
 export class ProductDetailsComponent implements OnInit {
-    @Input() value: Product;
+    @Input() value: ProductDetails;
 
     constructor(
         private _products: ProductsService,
         private _cart: CartService,
+        private _favs: FavoritesService,
         private _route: ActivatedRoute
     ) { }
         
@@ -35,7 +37,7 @@ export class ProductDetailsComponent implements OnInit {
 
     public addToCart() {
         if (!this.value) return;
-        this._cart.addItem(this.value.id)
+        this._cart.addItem(this.value.product.id)
             .subscribe(
                 result => console.log(`${result.product.name} added`),
                 error => console.log(error)

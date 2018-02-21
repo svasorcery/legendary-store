@@ -32,7 +32,7 @@ export class ProductEditComponent implements OnInit {
             .params
             .switchMap((params: Params) => this._products.getProduct(+params['id']))
             .subscribe(
-                result => this.value = result,
+                result => this.value = result.product,
                 error => console.log(error)
             );
     }

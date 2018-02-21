@@ -3,22 +3,23 @@
 <div *ngIf="value">
     <div class="well">
         <div class="col-md-2">
-            <img [src]="value.imageUrl" alt="Photo" class="img-responsive img-rounded" />
+            <img [src]="value.product.imageUrl" alt="Photo" class="img-responsive img-rounded" />
         </div>
         <div class="col-md-8">
-            <h3>{{ value.name }}</h3>
-            <p>{{ value.description }}</p>
+            <h3>{{ value.product.name }}</h3>
+            <p>{{ value.product.description }}</p>
         </div>
         <div class="col-md-2 text-right">
             <h4 class="text-info">
-                {{ value.price | currency:'USD':true}}
+                {{ value.product.price | currency:'USD':true}}
             </h4>
-            <button (click)="addToCart()" class="btn btn-primary">
-                <i class="fa fa-cart-plus"></i> Add to cart
-            </button>
+                <button (click)="addToCart()" class="btn btn-primary">
+                    <i class="fa fa-cart-plus"></i> Add to cart
+                </button>
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>
 
-    <comments [productId]="value.id"></comments>
+    <comments [productId]="value.product.id"></comments>
 </div>

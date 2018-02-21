@@ -21,6 +21,11 @@ export class Product {
     category: Category;
 }
 
+export class ProductDetails {
+    product: Product;
+    isFavorite: boolean;
+}
+
 export class ProductsList {
     categoryName: string;
     items: Product[];

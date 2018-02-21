@@ -7,7 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/catch';
 
-import { ProductsList, Product } from '../store.models';
+import { ProductsList, Product, ProductDetails } from '../store.models';
 
 @Injectable()
 export class ProductsService {
@@ -33,10 +33,10 @@ export class ProductsService {
             .map((response: Response) => response.json() as ProductsList);
     }
     
-    public getProduct(id: number): Observable<Product> {
+    public getProduct(id: number): Observable<ProductDetails> {
         return this._http.get(`${this._url}/${id}`)
             .delay(1000) // emulate remote server data fetching latency
-            .map((response: Response) => response.json() as Product);
+            .map((response: Response) => response.json() as ProductDetails);
     }
 
     public postProduct(value: Product): Observable<Product> {
