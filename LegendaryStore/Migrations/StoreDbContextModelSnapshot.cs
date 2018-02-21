@@ -82,7 +82,7 @@ namespace LegendaryStore.Migrations
 
             modelBuilder.Entity("LegendaryStore.Entities.Favorite", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("AddedAt");
@@ -92,6 +92,8 @@ namespace LegendaryStore.Migrations
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Favorites");
                 });
@@ -138,6 +140,14 @@ namespace LegendaryStore.Migrations
                     b.HasOne("LegendaryStore.Entities.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("LegendaryStore.Entities.Favorite", b =>
+                {
+                    b.HasOne("LegendaryStore.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LegendaryStore.Entities.Product", b =>

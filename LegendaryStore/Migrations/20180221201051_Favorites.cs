@@ -13,7 +13,7 @@ namespace LegendaryStore.Migrations
                 name: "Favorites",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddedAt = table.Column<DateTime>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),

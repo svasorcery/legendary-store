@@ -11,7 +11,7 @@ using System;
 namespace LegendaryStore.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20180221185600_Favorites")]
+    [Migration("20180221201051_Favorites")]
     partial class Favorites
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,7 @@ namespace LegendaryStore.Migrations
 
             modelBuilder.Entity("LegendaryStore.Entities.Favorite", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("AddedAt");
@@ -93,6 +93,8 @@ namespace LegendaryStore.Migrations
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Favorites");
                 });
@@ -139,6 +141,14 @@ namespace LegendaryStore.Migrations
                     b.HasOne("LegendaryStore.Entities.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("LegendaryStore.Entities.Favorite", b =>
+                {
+                    b.HasOne("LegendaryStore.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LegendaryStore.Entities.Product", b =>
