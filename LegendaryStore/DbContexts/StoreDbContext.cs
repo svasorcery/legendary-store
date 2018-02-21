@@ -14,6 +14,7 @@ namespace LegendaryStore.DbContexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -30,7 +31,7 @@ namespace LegendaryStore.DbContexts
 
             builder.Entity<Category>().Property(b => b.Name)
                 .IsRequired()
-                .HasMaxLength(25);;
+                .HasMaxLength(25);
         }
     }
 }
