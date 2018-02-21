@@ -12,6 +12,7 @@ import { ProductCreateComponent } from './products/create.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsListComponent } from './comments/list.component';
 import { CommentCreateComponent } from './comments/create.component';
+import { FavoritesListComponent } from './favorites/list.component';
 
 const routes: Routes = [
     { 
@@ -19,6 +20,7 @@ const routes: Routes = [
         component: StoreComponent,
         children: [
             { path: 'cart', component: CartComponent },
+            { path: 'favorites', component: FavoritesListComponent },
             { path: 'categories', component: CategoriesTreeComponent },
             { path: 'categories/:categoryId', component: ProductsListComponent },
             { path: 'categories/:categoryId/products/create', component: ProductCreateComponent },
@@ -51,5 +53,6 @@ export const storeComponents = [
     ProductCreateComponent,
     CommentsComponent,
     CommentsListComponent,
-    CommentCreateComponent
+    CommentCreateComponent,
+    FavoritesListComponent
 ];

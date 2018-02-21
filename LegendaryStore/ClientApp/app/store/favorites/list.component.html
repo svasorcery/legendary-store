@@ -1,0 +1,28 @@
+<spinner [active]="!items"></spinner>
+
+<table *ngIf="items" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody *ngIf="items.length === 0">
+        <tr>
+            <td colspan="5" class="text-center" style="color:grey">
+                <i>Your cart is empty</i>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr *ngFor="let fav of items" style="cursor:pointer">
+            <td>
+                <img [src]="fav.product.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
+                {{ fav.product.name }}
+            </td>
+            <td>
+                <i (click)="removeItem(fav)" class="fa fa-2x fa-heart" style="cursor:pointer"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>

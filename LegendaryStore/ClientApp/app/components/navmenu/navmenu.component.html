@@ -32,6 +32,11 @@
                         <span class='fa fa-shopping-cart'></span> Cart
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/store/favorites']">
+                        <span class='fa fa-heart-o'></span> Favorites
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
