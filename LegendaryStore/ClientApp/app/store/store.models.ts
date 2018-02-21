@@ -35,6 +35,7 @@ export class ProductsList {
 export class Favorite {
     id: number;
     productId: number;
+    product: Product;
     userName: string;
     addedAt: Date;
 }
