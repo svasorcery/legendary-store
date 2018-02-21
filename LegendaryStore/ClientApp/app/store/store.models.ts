@@ -32,6 +32,13 @@ export class ProductsList {
     paging: Paging;
 }
 
+export class Favorite {
+    id: number;
+    productId: number;
+    userName: string;
+    addedAt: Date;
+}
+
 export class Comment {
     id: number;
     productId: number;

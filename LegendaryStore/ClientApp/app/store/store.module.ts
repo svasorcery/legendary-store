@@ -8,6 +8,7 @@ import { StoreRoutingModule, storeComponents } from './store.routing';
 import { CategoriesService } from './categories/categories.service';
 import { ProductsService } from './products/products.service';
 import { CommentsService } from './comments/comments.service';
+import { FavoritesService } from './favorites/favorites.service';
 import { CartService } from './cart/cart.service';
 
 
@@ -25,6 +26,7 @@ import { CartService } from './cart/cart.service';
         CategoriesService,
         ProductsService,
         CommentsService,
+        FavoritesService,
         CartService
     ],
     exports: [
