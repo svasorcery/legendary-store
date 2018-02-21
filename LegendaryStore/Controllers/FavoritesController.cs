@@ -28,6 +28,11 @@ namespace LegendaryStore.Controllers
                 return NotFound();
             }
 
+            if (await _db.IsFavoriteAsync(productId))
+            {
+                return BadRequest();
+            }
+
             var item = await _db.AddToFavoritesAsync(product);
 
             return Ok(item);
@@ -41,6 +46,11 @@ namespace LegendaryStore.Controllers
             if (item == null)
             {
                 return NotFound();
+            }
+
+            if (false == await _db.IsFavoriteAsync(productId))
+            {
+                return BadRequest();
             }
 
             await _db.RemoveFromFavoritesAsync(item);
