@@ -15,6 +15,7 @@ namespace LegendaryStore.DbContexts
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Rating> Rating { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
