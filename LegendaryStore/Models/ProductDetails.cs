@@ -6,5 +6,6 @@ namespace LegendaryStore.Models
     {
         public Product Product { get; set; }
         public bool IsFavorite { get; set; }
+        public float RatingTotal { get; set; }
     }
 }

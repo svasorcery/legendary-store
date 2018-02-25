@@ -65,7 +65,8 @@ namespace LegendaryStore.Controllers
             var model = new ProductDetails
             {
                 Product = product,
-                IsFavorite = await _db.IsFavoriteAsync(product.Id)
+                IsFavorite = await _db.IsFavoriteAsync(product.Id),
+                RatingTotal = await _db.GetProductRatingAsync(product.Id)
             };
 
             return Ok(model);
