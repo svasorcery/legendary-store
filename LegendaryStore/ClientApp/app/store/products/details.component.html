@@ -14,12 +14,12 @@
                 {{ value.product.price | currency:'USD':true}}
             </h3><br />
             <div class="fa-2x">
-                <i (click)="rate(1)" class="fa" [class.fa-star-o]="value.ratingTotal<1" [class.fa-star]="value.ratingTotal>=1" style="cursor:pointer"></i>
-                <i (click)="rate(2)" class="fa" [class.fa-star-o]="value.ratingTotal<2" [class.fa-star]="value.ratingTotal>=2" style="cursor:pointer"></i>
-                <i (click)="rate(3)" class="fa" [class.fa-star-o]="value.ratingTotal<3" [class.fa-star]="value.ratingTotal>=3" style="cursor:pointer"></i>
-                <i (click)="rate(4)" class="fa" [class.fa-star-o]="value.ratingTotal<4" [class.fa-star]="value.ratingTotal>=4" style="cursor:pointer"></i>
-                <i (click)="rate(5)" class="fa" [class.fa-star-o]="value.ratingTotal<5" [class.fa-star]="value.ratingTotal>=5" style="cursor:pointer"></i> 
-                <div>{{ value.ratingTotal | number:'1.2-2' }}</div>
+                <div>Rating: {{ value.ratingTotal | number:'1.2-2' }}</div>
+                <rating-bar 
+                    [ratingTotal]="value.ratingTotal" 
+                    [count]="5" 
+                    (rate)="rate($event)"
+                    style="color:goldenrod"></rating-bar>
             </div><br />
             <div style="cursor:pointer" class="fa-3x">
                 <i (click)="removeFromFavorites()" *ngIf="value.isFavorite" class="fa fa-heart text-danger"></i>
