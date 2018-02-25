@@ -10,12 +10,20 @@
             <p>{{ value.product.description }}</p>
         </div>
         <div class="col-md-2 text-right">
-            <h4 class="text-info">
+            <h3 class="text-info">
                 {{ value.product.price | currency:'USD':true}}
-            </h4>
-            <div style="cursor:pointer">
-                <i (click)="removeFromFavorites()" class="fa fa-2x fa-heart" *ngIf="value.isFavorite"></i>
-                <i (click)="addToFavorites()" class="fa fa-2x fa-heart-o" *ngIf="!value.isFavorite"></i>
+            </h3><br />
+            <div class="fa-2x">
+                <i (click)="rate(1)" class="fa" [class.fa-star-o]="value.ratingTotal<1" [class.fa-star]="value.ratingTotal>=1" style="cursor:pointer"></i>
+                <i (click)="rate(2)" class="fa" [class.fa-star-o]="value.ratingTotal<2" [class.fa-star]="value.ratingTotal>=2" style="cursor:pointer"></i>
+                <i (click)="rate(3)" class="fa" [class.fa-star-o]="value.ratingTotal<3" [class.fa-star]="value.ratingTotal>=3" style="cursor:pointer"></i>
+                <i (click)="rate(4)" class="fa" [class.fa-star-o]="value.ratingTotal<4" [class.fa-star]="value.ratingTotal>=4" style="cursor:pointer"></i>
+                <i (click)="rate(5)" class="fa" [class.fa-star-o]="value.ratingTotal<5" [class.fa-star]="value.ratingTotal>=5" style="cursor:pointer"></i> 
+                <div>{{ value.ratingTotal | number:'1.2-2' }}</div>
+            </div><br />
+            <div style="cursor:pointer" class="fa-3x">
+                <i (click)="removeFromFavorites()" *ngIf="value.isFavorite" class="fa fa-heart text-danger"></i>
+                <i (click)="addToFavorites()" *ngIf="!value.isFavorite" class="fa fa-heart-o"></i>
             </div><br />
             <div>
                 <button (click)="addToCart()" class="btn btn-primary">
