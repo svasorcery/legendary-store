@@ -9,7 +9,7 @@ namespace LegendaryStore.Services
     public partial class StoreDbService
     {
 
-        public Task<Rating[]> GetRatingsAsync()
+        public Task<Rating[]> GetRatingItemsAsync()
         {
             return _storeDb.Rating
                 .Include(x => x.Product)
@@ -17,7 +17,7 @@ namespace LegendaryStore.Services
                 .ToArrayAsync();
         }
 
-        public Task<Rating> GetRatingAsync(int productId)
+        public Task<Rating> GetRatingItemAsync(int productId)
         {
             var userName = _userService.GetUserName();
 
@@ -27,14 +27,33 @@ namespace LegendaryStore.Services
                                         && i.UserName == userName);
         }
 
-        public async Task<Rating> RateProductAsync(Product product, RatingRate rate)
+        public async Task<bool> IsRatedAsync(int productId)
         {
             var userName = _userService.GetUserName();
 
+            return (await _storeDb.Rating
+                .Where(x => x.ProductId == productId && x.UserName == userName)
+                .ToArrayAsync()) != null;
+        }
+
+        public async Task<float> GetProductRatingAsync(int productId)
+        {
+            var rates = await _storeDb.Rating
+                .Where(x => x.ProductId == productId)
+                .Select(x => (int)x.Rate)
+                .ToArrayAsync();
+
+            return rates.Count() > 0 ? 
+                (float)rates.Sum() / rates.Count() :
+                0.0f;
+        }
+
+        public async Task<Rating> RateProductAsync(Product product, RatingRate rate)
+        {
             var rating = new Rating
             {
                 ProductId = product.Id,
-                UserName = userName,
+                UserName = _userService.GetUserName(),
                 Rate = rate,
                 RatedAt = DateTime.Now.ToUniversalTime()
             };

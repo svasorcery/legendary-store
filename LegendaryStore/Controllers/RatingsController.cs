@@ -29,9 +29,25 @@ namespace LegendaryStore.Controllers
                 return NotFound();
             }
 
-            var item = await _db.GetRatingAsync(product.Id);
+            var item = await _db.GetRatingItemAsync(product.Id);
 
             return Ok(item);
+        }
+
+
+        [HttpGet("{productId:int}/total")]
+        public async Task<IActionResult> Total([FromRoute]int productId)
+        {
+            var product = await _db.GetProductAsync(productId);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var rating = await _db.GetProductRatingAsync(product.Id);
+
+            return Ok(new { Rating = rating });
         }
 
         [HttpPost("rate/{productId:int}")]
