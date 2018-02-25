@@ -7,9 +7,10 @@ import { SharedModule } from '../shared/shared.module';
 import { StoreRoutingModule, storeComponents } from './store.routing';
 import { CategoriesService } from './categories/categories.service';
 import { ProductsService } from './products/products.service';
+import { CartService } from './cart/cart.service';
 import { CommentsService } from './comments/comments.service';
 import { FavoritesService } from './favorites/favorites.service';
-import { CartService } from './cart/cart.service';
+import { RatingsService } from './ratings/ratings.service';
 
 
 @NgModule({
@@ -25,9 +26,10 @@ import { CartService } from './cart/cart.service';
     providers: [
         CategoriesService,
         ProductsService,
+        CartService,
         CommentsService,
         FavoritesService,
-        CartService
+        RatingsService
     ],
     exports: [
         ...storeComponents

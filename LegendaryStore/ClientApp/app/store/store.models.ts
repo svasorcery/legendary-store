@@ -40,6 +40,23 @@ export class Favorite {
     addedAt: Date;
 }
 
+export class Rating {
+    id: number;
+    productId: number;
+    product: Product;
+    userName: string;
+    rate: RatingRate;
+    ratedAt: Date;
+}
+
+export enum RatingRate {
+    poor = 1,
+    fair = 2,
+    average = 3,
+    good = 4,
+    excellent = 5
+}
+
 export class Comment {
     id: number;
     productId: number;
