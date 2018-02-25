@@ -7,6 +7,7 @@ import { SpinnerComponent } from './spinner.component';
 import { AutoCompleteComponent } from './autocomplete.component';
 import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component';
 import { ModalComponent } from './modal.component';
+import { RatingBarComponent, RatingStarComponent } from './rating-bar.component';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { ModalComponent } from './modal.component';
         AutoCompleteComponent,
         TreeMenuItemComponent,
         TreeMenuComponent,
-        ModalComponent
+        ModalComponent,
+        RatingBarComponent, RatingStarComponent
     ],
     providers: [
 
@@ -30,7 +32,8 @@ import { ModalComponent } from './modal.component';
         AutoCompleteComponent,
         TreeMenuItemComponent,
         TreeMenuComponent,
-        ModalComponent
+        ModalComponent,
+        RatingBarComponent
     ],
 })
 export class SharedModule {
