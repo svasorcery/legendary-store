@@ -33,7 +33,7 @@ namespace LegendaryStore.Services
 
             return (await _storeDb.Rating
                 .Where(x => x.ProductId == productId && x.UserName == userName)
-                .ToArrayAsync()) != null;
+                .ToArrayAsync()).Length > 0;
         }
 
         public async Task<float> GetProductRatingAsync(int productId)
