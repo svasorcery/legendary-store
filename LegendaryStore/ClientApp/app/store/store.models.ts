@@ -25,6 +25,7 @@ export class ProductDetails {
     product: Product;
     isFavorite: boolean;
     ratingTotal: number;
+    isRated: boolean;
 }
 
 export class ProductsList {

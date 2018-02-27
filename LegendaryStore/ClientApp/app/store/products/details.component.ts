@@ -72,7 +72,10 @@ export class ProductDetailsComponent implements OnInit {
                 result => {
                     this._ratings.getTotalRate(this.value.product.id)
                         .subscribe(
-                            result => this.value.ratingTotal = result.rating,
+                            result => { 
+                                this.value.ratingTotal = result.rating;
+                                this.value.isRated = true;
+                            },
                             error => console.log(error)
                         )
                 },
