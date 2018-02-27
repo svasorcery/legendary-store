@@ -17,7 +17,8 @@
                 <div>Rating: {{ value.ratingTotal | number:'1.2-2' }}</div>
                 <rating-bar 
                     [ratingTotal]="value.ratingTotal" 
-                    [count]="5" 
+                    [count]="5"
+                    [readonly]="value.isRated"
                     (rate)="rate($event)"
                     style="color:goldenrod"></rating-bar>
             </div><br />

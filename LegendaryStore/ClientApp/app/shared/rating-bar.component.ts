@@ -11,17 +11,27 @@ export enum RatingRate {
 @Component({
     selector: 'rating-bar',
     template: `
-        <rating-star *ngFor="let star of stars" 
-            [factor]="star" 
-            [ratingTotal]="ratingTotal"
-            (click)="rate($event)">
-        </rating-star>
+        <div *ngIf="readonly">
+            <rating-star *ngFor="let star of stars" 
+                [factor]="star" 
+                [ratingTotal]="ratingTotal">
+            </rating-star>
+        </div>
+        <div *ngIf="!readonly">
+            <rating-star *ngFor="let star of stars" 
+                [factor]="star" 
+                [ratingTotal]="ratingTotal"
+                (click)="rate($event)" 
+                style="cursor:pointer">
+            </rating-star>
+        </div>
     `
 })
 
 export class RatingBarComponent implements OnInit {
     @Input() ratingTotal: number;
     @Input() count: number;
+    @Input() readonly: boolean;
     @Output('rate') onRate: EventEmitter<RatingRate>;
 
     stars: number[] = [];
@@ -51,8 +61,7 @@ export class RatingBarComponent implements OnInit {
             class="fa" 
             [class.fa-star-o]="fill==='none'" 
             [class.fa-star-half-o]="fill==='half'" 
-            [class.fa-star]="fill==='full'" 
-            style="cursor:pointer">
+            [class.fa-star]="fill==='full'">
         </i>
     `
 })
