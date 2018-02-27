@@ -45,9 +45,10 @@ namespace LegendaryStore.Controllers
                 return NotFound();
             }
 
-            var rating = await _db.GetProductRatingAsync(product.Id);
+            var total = await _db.GetProductRatingAsync(product.Id);
+            var byUser = await _db.GetRatingByUserAsync(product.Id);
 
-            return Ok(new { Rating = rating });
+            return Ok(new { Total = total, ByUser = byUser });
         }
 
         [HttpPost("rate/{productId:int}")]

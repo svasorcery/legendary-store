@@ -14,7 +14,8 @@ export enum RatingRate {
         <div *ngIf="readonly">
             <rating-star *ngFor="let star of stars" 
                 [factor]="star" 
-                [ratingTotal]="ratingTotal">
+                [ratingTotal]="ratingTotal"
+                style="color:goldenrod;">
             </rating-star>
         </div>
         <div *ngIf="!readonly">
@@ -22,7 +23,7 @@ export enum RatingRate {
                 [factor]="star" 
                 [ratingTotal]="ratingTotal"
                 (click)="rate($event)" 
-                style="cursor:pointer">
+                style="color:grey; cursor:pointer">
             </rating-star>
         </div>
     `

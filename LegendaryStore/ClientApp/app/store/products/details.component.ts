@@ -29,9 +29,7 @@ export class ProductDetailsComponent implements OnInit {
                 .params
                 .switchMap((params: Params) => this._products.getProduct(+params['id']))
                 .subscribe(
-                    result => {
-                        this.value = result;
-                    },
+                    result => this.value = result,
                     error => console.log(error)
                 );
         }
@@ -73,13 +71,19 @@ export class ProductDetailsComponent implements OnInit {
                     this._ratings.getTotalRate(this.value.product.id)
                         .subscribe(
                             result => { 
-                                this.value.ratingTotal = result.rating;
-                                this.value.isRated = true;
+                                this.value.ratingTotal = result.total;
+                                this.value.ratingByUser = result.byUser;
                             },
                             error => console.log(error)
                         )
                 },
                 error => console.log(error)
             );
+    }
+
+    public get ratingTotal() {
+        return this.value.ratingByUser == null ?
+            this.value.ratingTotal : 
+            this.value.ratingByUser;
     }
 }

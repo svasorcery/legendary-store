@@ -29,11 +29,16 @@ namespace LegendaryStore.Services
 
         public async Task<bool> IsRatedAsync(int productId)
         {
+            return (await GetRatingByUserAsync(productId)) != null;
+        }
+
+        public async Task<RatingRate?> GetRatingByUserAsync(int productId)
+        {
             var userName = _userService.GetUserName();
 
             return (await _storeDb.Rating
-                .Where(x => x.ProductId == productId && x.UserName == userName)
-                .ToArrayAsync()).Length > 0;
+                .FirstOrDefaultAsync(x => x.ProductId == productId && x.UserName == userName)
+                )?.Rate;
         }
 
         public async Task<float> GetProductRatingAsync(int productId)

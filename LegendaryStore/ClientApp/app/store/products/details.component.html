@@ -16,18 +16,17 @@
             <div class="fa-2x">
                 <div>Rating: {{ value.ratingTotal | number:'1.2-2' }}</div>
                 <rating-bar 
-                    [ratingTotal]="value.ratingTotal" 
+                    [ratingTotal]="ratingTotal" 
                     [count]="5"
-                    [readonly]="value.isRated"
-                    (rate)="rate($event)"
-                    style="color:goldenrod"></rating-bar>
+                    [readonly]="value.ratingByUser"
+                    (rate)="rate($event)"></rating-bar>
             </div><br />
             <div style="cursor:pointer" class="fa-3x">
                 <i (click)="removeFromFavorites()" *ngIf="value.isFavorite" class="fa fa-heart text-danger"></i>
                 <i (click)="addToFavorites()" *ngIf="!value.isFavorite" class="fa fa-heart-o"></i>
             </div><br />
             <div>
-                <button (click)="addToCart()" class="btn btn-primary">
+                <button (click)="addToCart()" class="btn btn-lg btn-primary">
                     <i class="fa fa-cart-plus"></i> Add to cart
                 </button>
             </div>

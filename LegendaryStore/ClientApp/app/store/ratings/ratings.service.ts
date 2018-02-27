@@ -23,9 +23,9 @@ export class RatingsService {
             .map((response: Response) => response.json() as Rating);
     }
 
-    public getTotalRate(productId: number): Observable<{ rating: number }> {
-        return  this._http.get(`${this._url}/${productId}/total`)
-            .map((response: Response) => response.json() as { rating: number });
+    public getTotalRate(productId: number): Observable<{ total: number, byUser: number }> {
+        return this._http.get(`${this._url}/${productId}/total`)
+            .map((response: Response) => response.json() as { total: number, byUser: number });
     }
     
     public rateItem(productId: number, rate: RatingRate): Observable<Rating> {
