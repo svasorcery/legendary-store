@@ -27,7 +27,11 @@ import { CommentsService } from './comments.service';
                         <i class="fa fa-paper-plane"></i> 
                         Send
                 </button>
-                <a (click)="cancel()" class="btn btn-default">Clear</a>
+                <a (click)="cancel()"
+                    *ngIf="comment"
+                    class="btn btn-default">
+                    Clear
+                </a>
             </div>
         </form>
     `
