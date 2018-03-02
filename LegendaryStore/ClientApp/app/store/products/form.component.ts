@@ -4,7 +4,12 @@ import { Product } from '../store.models';
 
 @Component({
     selector: 'product-form',
-    templateUrl: 'form.component.html'
+    templateUrl: 'form.component.html',
+    styles: [`
+        .alert-sm {
+            padding: 5px 15px;
+        }
+    `]
 })
 
 export class ProductFormComponent {

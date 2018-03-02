@@ -2,16 +2,21 @@
     <div class="form-group">
         <label for="image" class="control-label">Image</label>
         <input type="file"
+            #image="ngModel"
             [(ngModel)]="value.image"
             required
             placeholder="Enter image"
             name="image"
             class="form-control"
         />
+        <div *ngIf="image.invalid && (image.dirty || image.touched)" class="alert alert-sm alert-danger">
+            <div *ngIf="image.errors.required">Image is required</div>
+        </div>  
     </div>
     <div class="form-group">
         <label for="name" class="control-label">Name</label>
         <input type="text"
+            #name="ngModel"
             [(ngModel)]="value.name"
             required
             minlength="3"
@@ -20,38 +25,59 @@
             name="name"
             class="form-control"
         />
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-sm alert-danger">
+            <div *ngIf="name.errors.required">Name is required</div>
+            <div *ngIf="name.errors.minlength">Min length is 3</div>
+            <div *ngIf="name.errors.maxlength">Max length is 200</div>
+        </div> 
     </div>
     <div class="form-group">
         <label for="description" class="control-label">Description</label>
         <textarea
+            #description="ngModel"
             [(ngModel)]="value.description"
             placeholder="Enter description"
             maxlength="500"
             name="description"
             class="form-control">
         </textarea> 
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-sm alert-danger">
+            <div *ngIf="description.errors.maxlength">Max length is 500</div>
+        </div> 
     </div>
     <div class="form-group">
         <label for="price" class="control-label">Price</label>
         <input type="number"
+            #price="ngModel"
             [(ngModel)]="value.price"
             required
+            min="0.1"
             step="0.1"
             placeholder="Enter price"
             name="price"
             class="form-control"
         />
+        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-sm alert-danger">
+            <div *ngIf="price.errors.required">Price is required</div>
+            <div *ngIf="price.errors.minvalue">Price must be greater then 0</div>
+        </div> 
     </div>
     <div class="form-group">
         <label for="quantity" class="control-label">Quantity</label>
         <input type="number"
+            #quantity="ngModel"
             [(ngModel)]="value.quantity"
             required
+            min="0"
             step="1"
             placeholder="Enter quantity"
             name="quantity"
             class="form-control"
         />
+        <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="alert alert-sm alert-danger">
+            <div *ngIf="quantity.errors.required">Quantity is required</div>
+            <div *ngIf="quantity.errors.min">Quantity must not be less then 0</div>
+        </div> 
     </div>
 
     <div class="form-group">
