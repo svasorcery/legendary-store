@@ -9,9 +9,9 @@
     </label>
     <div class="col-md-6">
         <autocomplete 
-            [(ngModel)]="product"
             [source]="products.productsSource"
-            placeholder="Enter a product name">
+            [placeholder]="'Start to type a product name'"
+            (select)="getProductDetails($event.id)">
         </autocomplete>
     </div><br><br>
 </div>
