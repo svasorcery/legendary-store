@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { SpinnerComponent } from './spinner.component';
 import { AutoCompleteComponent } from './autocomplete.component';
 import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component';
 import { ModalComponent } from './modal.component';
 import { RatingBarComponent, RatingStarComponent } from './rating-bar.component';
+import { FileUploadComponent } from './file-upload.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
     declarations: [
         SpinnerComponent,
@@ -21,7 +24,8 @@ import { RatingBarComponent, RatingStarComponent } from './rating-bar.component'
         TreeMenuItemComponent,
         TreeMenuComponent,
         ModalComponent,
-        RatingBarComponent, RatingStarComponent
+        RatingBarComponent, RatingStarComponent,
+        FileUploadComponent
     ],
     providers: [
 
@@ -33,7 +37,8 @@ import { RatingBarComponent, RatingStarComponent } from './rating-bar.component'
         TreeMenuItemComponent,
         TreeMenuComponent,
         ModalComponent,
-        RatingBarComponent
+        RatingBarComponent,
+        FileUploadComponent
     ],
 })
 export class SharedModule {
