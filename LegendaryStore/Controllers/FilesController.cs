@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 
@@ -23,7 +24,6 @@ namespace LegendaryStore.Controllers
         {
             try
             {
-                var file = Request.Form.Files[0];
                 string folderName = "images";
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 string newPath = Path.Combine(webRootPath, folderName);
@@ -31,16 +31,23 @@ namespace LegendaryStore.Controllers
                 {
                     Directory.CreateDirectory(newPath);
                 }
-                if (file.Length > 0)
+
+                var urls = new List<string>();
+
+                foreach (var file in Request.Form.Files)
                 {
-                    string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    string fullPath = Path.Combine(newPath, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    if (file.Length > 0)
                     {
-                        file.CopyTo(stream);
+                        string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        string fullPath = Path.Combine(newPath, fileName);
+                        urls.Add(fullPath);
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
                     }
                 }
-                return Ok("Upload Successful.");
+                return Ok(new { message = "Upload Successful.", urls });
             }
             catch (Exception ex)
             {
