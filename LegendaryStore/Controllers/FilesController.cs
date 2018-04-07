@@ -11,7 +11,7 @@ namespace LegendaryStore.Controllers
     [Route("api/[controller]")]
     public class FilesController : Controller
     {
-        private IHostingEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         public FilesController(IHostingEnvironment hostingEnvironment)
         {
@@ -40,11 +40,11 @@ namespace LegendaryStore.Controllers
                     {
                         string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                         string fullPath = Path.Combine(newPath, fileName);
-                        urls.Add(fullPath);
                         using (var stream = new FileStream(fullPath, FileMode.Create))
                         {
                             file.CopyTo(stream);
                         }
+                        urls.Add(fullPath);
                     }
                 }
                 return Ok(new { message = "Upload Successful.", urls });

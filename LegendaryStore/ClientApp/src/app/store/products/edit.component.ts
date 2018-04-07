@@ -8,7 +8,7 @@ import { ProductsService } from './products.service';
     selector: 'product-edit',
     template: `
         <spinner [active]="!value"></spinner>
-        <div *ngIf="value">
+        <div *ngIf="value" class="col-md-offset-1 col-md-10">
             <h3>{{ value.name }}</h3>
             <product-form 
                 [value]="value" 

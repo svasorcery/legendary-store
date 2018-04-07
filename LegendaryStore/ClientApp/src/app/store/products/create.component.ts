@@ -8,11 +8,13 @@ import { Product } from '../store.models';
     selector: 'product-create',
     template: `
         <h3>New product</h3>
-        <product-form 
-            [value]="value" 
-            (save)="submit($event)" 
-            (cancel)="cancel()">
-        </product-form>
+        <div class="col-md-offset-1 col-md-10">
+            <product-form 
+                [value]="value" 
+                (save)="submit($event)" 
+                (cancel)="cancel()">
+            </product-form>
+        </div>
     `
 })
 

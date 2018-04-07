@@ -1,6 +1,6 @@
 <form #form="ngForm" novalidate (submit)="submit()" *ngIf="value">
     <div class="form-group">
-        <label for="image" class="control-label">Image</label>
+        <label for="image" class="control-label">Image</label><br>
         <file-upload #image accept=".jpg"></file-upload>
         <div *ngIf="image.invalid && (image.dirty || image.touched)" class="alert alert-sm alert-danger">
             <div *ngIf="image.errors.required">Image is required</div>
