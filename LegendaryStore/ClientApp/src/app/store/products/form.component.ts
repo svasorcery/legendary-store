@@ -28,4 +28,15 @@ export class ProductFormComponent {
     public cancel(): void {
         this.onCancel.emit(true);
     }
+
+    public addImage(url: string) {
+        if (!url) return;
+        this.value.imageUrl = url;
+    }
+
+    public removeImage(): void {
+        if (!this.value.imageUrl) return;
+        if (!confirm(`Are you sure want to remove product image?`)) return;
+        this.value.imageUrl = null;
+    }
 }

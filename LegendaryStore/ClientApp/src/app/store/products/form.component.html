@@ -1,10 +1,27 @@
 <form #form="ngForm" novalidate (submit)="submit()" *ngIf="value">
     <div class="form-group">
-        <label for="image" class="control-label">Image</label><br>
-        <file-upload #image accept=".jpg"></file-upload>
-        <div *ngIf="image.invalid && (image.dirty || image.touched)" class="alert alert-sm alert-danger">
-            <div *ngIf="image.errors.required">Image is required</div>
-        </div>  
+        <label for="image" class="control-label">
+            Image
+            <i (click)="removeImage()" class="fa fa-trash-o" style="cursor:pointer"></i>
+        </label><br>
+        <div *ngIf="!value.imageUrl">
+            <file-upload
+                #image 
+                accept=".jpg" 
+                type="primary-inverse" 
+                [multiple]="false"
+                [preview]="false"
+                (change)="addImage($event[0])">
+            </file-upload>
+            <div *ngIf="image.invalid && (image.dirty || image.touched)" class="alert alert-sm alert-danger">
+                <div *ngIf="image.errors.required">Image is required</div>
+            </div> 
+        </div>
+        <div *ngIf="value.imageUrl" style="max-height:300px; max-width:200px;">
+            <a [href]="value.imageUrl" target="_blank" class="thumbnail">
+                <img [src]="value.imageUrl" />
+            </a>
+        </div>
     </div>
     <div class="form-group">
         <label for="name" class="control-label">Name</label>
