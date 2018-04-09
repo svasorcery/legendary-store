@@ -1,5 +1,5 @@
-import { Component, Input, Output } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http'
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'file-upload',
@@ -7,13 +7,13 @@ import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/c
         <input type="file" #file
             [multiple]="multiple"
             [attr.accept]="accept"
-            (change)="onChange(file.files)"
+            (change)="change(file.files)"
             name="file-1[]" id="file-1"
             [class]="'inputfile ' + type"
             />
         <label for="file-1">
             <i class="fa fa-upload"></i>
-            <span *ngIf="!fileName">Выберите файл...</span>
+            <span *ngIf="!fileName">Choose file...</span>
             <span *ngIf="fileName">
                 <i *ngIf="progress > 0 && progress < 100" class="fa fa-spinner fa-pulse fa-fw"></i>
                 {{ fileName }}
@@ -94,15 +94,16 @@ export class FileUploadComponent {
     @Input() multiple: boolean = true;
     @Input() preview: boolean = true;
 
-    @Output() urls: string[] = [];
+    @Output("change") onChange: EventEmitter<string[]> = new EventEmitter();
 
     progress: number;
     message: string;
     fileName: string;
+    urls: string[] = [];
 
     constructor(private _http: HttpClient) { }
 
-    public onChange(files: File[]): void {
+    public change(files: File[]): void {
         this.upload(files);
         this.changeText(files);
     }
@@ -126,6 +127,7 @@ export class FileUploadComponent {
             } else if (event.type === HttpEventType.Response) {
                 this.message = event.body['message'];
                 (event.body['urls'] as string[]).forEach(x => this.urls.push(x));
+                this.onChange.emit(this.urls);
             }
         });
     }
