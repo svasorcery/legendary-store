@@ -24,9 +24,11 @@ namespace LegendaryStore.Controllers
         {
             try
             {
-                string folderName = "images";
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                string newPath = Path.Combine(webRootPath, folderName);
+                var folderName = "images";
+                var webRootPath = _hostingEnvironment.WebRootPath;
+                var newPath = Path.Combine(webRootPath, folderName);
+                var urlBasePath = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}/{folderName}";
+
                 if (!Directory.Exists(newPath))
                 {
                     Directory.CreateDirectory(newPath);
@@ -38,15 +40,17 @@ namespace LegendaryStore.Controllers
                 {
                     if (file.Length > 0)
                     {
-                        string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        string fileName = Guid.NewGuid().ToString() + ".jpg"; //ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                         string fullPath = Path.Combine(newPath, fileName);
                         using (var stream = new FileStream(fullPath, FileMode.Create))
                         {
                             file.CopyTo(stream);
                         }
-                        urls.Add(fullPath);
+
+                        urls.Add($"{urlBasePath}/{fileName}");
                     }
                 }
+
                 return Ok(new { message = "Upload Successful.", urls });
             }
             catch (Exception ex)
