@@ -9,11 +9,12 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/catch';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule, appComponents, } from './app.routing';
+import { AppRoutingModule, appComponents } from './app.routing';
 
 import { UserService } from './user.service';
 
 import { SharedModule } from './shared/shared.module';
+import { ErrorsModule } from './errors/errors.module';
 import { StoreModule } from './store/store.module';
 
 @NgModule({
@@ -25,7 +26,7 @@ import { StoreModule } from './store/store.module';
         HttpClientModule,
         FormsModule,
         SharedModule,
-        FormsModule,
+        ErrorsModule,
         StoreModule,
         AppRoutingModule,
     ],
@@ -36,6 +37,6 @@ import { StoreModule } from './store/store.module';
         AppComponent
     ]
 })
-export class AppModule { 
-  
+export class AppModule {
+
 }
