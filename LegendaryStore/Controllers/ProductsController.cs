@@ -9,7 +9,6 @@ namespace LegendaryStore.Controllers
     using LegendaryStore.Models;
     using LegendaryStore.Services;
 
-    [Authorize]
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
@@ -52,6 +51,7 @@ namespace LegendaryStore.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "FullAccess")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
@@ -73,6 +73,7 @@ namespace LegendaryStore.Controllers
             return Ok(model);
         }
 
+        [Authorize(Policy = "FullAccess")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]Product model)
         {
@@ -89,6 +90,7 @@ namespace LegendaryStore.Controllers
             }
         }
 
+        [Authorize(Policy = "FullAccess")]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Edit([FromRoute]int id, [FromBody]Product model)
         {
@@ -104,6 +106,7 @@ namespace LegendaryStore.Controllers
             }
         }
 
+        [Authorize(Policy = "FullAccess")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
