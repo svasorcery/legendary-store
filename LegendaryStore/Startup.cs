@@ -21,18 +21,27 @@ namespace LegendaryStore
         {
             services
                     .AddAuthentication(DevelopmentAuthentication.DevelopmentAuthenticationDefaults.AuthenticationScheme)
-                    .AddDevelopment(new DevelopmentUser
-                    {
-                        Username = "developer",
-                        Password = "zxasqw12",
-                        Roles = new string[] { "IT" },
-                        Subject = "S-0-0-00-0000000000-0000000000-0000000000-0000"
-                    });
+                    .AddDevelopment(
+                        new DevelopmentUser
+                        {
+                            Username = "developer",
+                            Password = "zxasqw12",
+                            Roles = new string[] { "Developer", "Admin" },
+                            Subject = "S-0-0-00-0000000000-0000000000-0000000000-0000"
+                        },
+                        new DevelopmentUser
+                        {
+                            Username = "customer",
+                            Password = "cvdfer34",
+                            Roles = new string[] { },
+                            Subject = "S-0-0-00-0000000000-0000000000-0000000000-0000"
+                        }
+                    );
 
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("DevelopmentAccess", policy => policy.RequireRole("Developer"));
-            //});
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("FullAccess", policy => policy.RequireRole("Developer"));
+            });
 
             services.AddMvc();
 
