@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SpinnerComponent } from './spinner.component';
+import { ErrorComponent } from './error.component';
 import { AutoCompleteComponent } from './autocomplete.component';
 import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component';
 import { ModalComponent } from './modal.component';
@@ -20,6 +21,7 @@ import { FileUploadComponent } from './file-upload.component';
     ],
     declarations: [
         SpinnerComponent,
+        ErrorComponent,
         AutoCompleteComponent,
         TreeMenuItemComponent,
         TreeMenuComponent,
@@ -33,6 +35,7 @@ import { FileUploadComponent } from './file-upload.component';
     exports: [
         CommonModule,
         SpinnerComponent,
+        ErrorComponent,
         AutoCompleteComponent,
         TreeMenuItemComponent,
         TreeMenuComponent,
