@@ -58,7 +58,7 @@ namespace LegendaryStore.Controllers
             return Ok(item);
         }
 
-        [HttpGet]
+        [HttpGet("checkout")]
         public async Task<IActionResult> Checkout()
         {
             var items = await _db.GetCartItemsAsync();
@@ -83,7 +83,7 @@ namespace LegendaryStore.Controllers
             return Ok(orderNew);
         }
 
-        [HttpPut]
+        [HttpPut("checkout")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout([FromBody]Order formOrder)
         {
