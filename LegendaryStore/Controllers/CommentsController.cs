@@ -42,7 +42,7 @@ namespace LegendaryStore.Controllers
 
             await _db.CreateCommentAsync(comment);
 
-            return Ok(product);
+            return Ok(comment);
         }
 
         [HttpDelete("{id:long}")]
