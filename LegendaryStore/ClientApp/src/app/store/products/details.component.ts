@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
-import { Product, ProductDetails, RatingRate } from '../store.models';
+import { ProductDetails, RatingRate } from '../store.models';
 import { ProductsService } from './products.service';
 import { CartService } from '../cart/cart.service';
 import { FavoritesService } from '../favorites/favorites.service';
@@ -22,12 +23,12 @@ export class ProductDetailsComponent implements OnInit {
         private _ratings: RatingsService,
         private _route: ActivatedRoute
     ) { }
-        
-    ngOnInit() { 
+
+    ngOnInit() {
         if (!this.value) {
             this._route
                 .params
-                .switchMap((params: Params) => this._products.getProduct(+params['id']))
+                .pipe(switchMap((params: Params) => this._products.getProduct(+params['id'])))
                 .subscribe(
                     result => this.value = result,
                     error => console.log(error)
@@ -36,7 +37,7 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     public addToCart() {
-        if (!this.value) return;
+        if (!this.value) { return; }
         this._cart.addItem(this.value.product.id)
             .subscribe(
                 result => console.log(`${result.product.name} added`),
@@ -45,7 +46,7 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     public addToFavorites() {
-        if (!this.value) return;
+        if (!this.value) { return; }
         this._favs.addItem(this.value.product.id)
             .subscribe(
                 result => this.value.isFavorite = true,
@@ -54,7 +55,7 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     public removeFromFavorites() {
-        if (!this.value) return;
+        if (!this.value) { return; }
         this._favs.removeItem(this.value.product.id)
             .subscribe(
                 result => this.value.isFavorite = false,
@@ -63,19 +64,19 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     public rate(rate: number) {
-        if (!rate || !(rate as RatingRate)) return;
+        if (!rate || !(rate as RatingRate)) { return; }
 
         this._ratings.rateItem(this.value.product.id, rate)
             .subscribe(
                 result => {
                     this._ratings.getTotalRate(this.value.product.id)
                         .subscribe(
-                            result => { 
-                                this.value.ratingTotal = result.total;
-                                this.value.ratingByUser = result.byUser;
+                            rating => {
+                                this.value.ratingTotal = rating.total;
+                                this.value.ratingByUser = rating.byUser;
                             },
                             error => console.log(error)
-                        )
+                        );
                 },
                 error => console.log(error)
             );
@@ -83,7 +84,7 @@ export class ProductDetailsComponent implements OnInit {
 
     public get ratingTotal() {
         return this.value.ratingByUser == null ?
-            this.value.ratingTotal : 
+            this.value.ratingTotal :
             this.value.ratingByUser;
     }
 }

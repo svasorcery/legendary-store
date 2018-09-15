@@ -45,5 +45,5 @@ import { FileUploadComponent } from './file-upload.component';
     ],
 })
 export class SharedModule {
-    
+
 }

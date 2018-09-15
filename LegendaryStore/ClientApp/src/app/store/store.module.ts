@@ -35,6 +35,6 @@ import { RatingsService } from './ratings/ratings.service';
         ...storeComponents
     ],
 })
-export class StoreModule { 
+export class StoreModule {
 
 }

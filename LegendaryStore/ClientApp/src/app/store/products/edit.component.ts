@@ -10,9 +10,9 @@ import { ProductsService } from './products.service';
         <spinner [active]="!value"></spinner>
         <div *ngIf="value" class="col-md-offset-1 col-md-10">
             <h3>{{ value.name }}</h3>
-            <product-form 
-                [value]="value" 
-                (save)="submit($event)" 
+            <product-form
+                [value]="value"
+                (save)="submit($event)"
                 (cancel)="cancel()">
             </product-form>
         </div>
@@ -26,8 +26,8 @@ export class ProductEditComponent implements OnInit {
         private _products: ProductsService,
         private _route: ActivatedRoute
     ) { }
-        
-    ngOnInit() { 
+
+    ngOnInit() {
         this._route
             .params
             .switchMap((params: Params) => this._products.getProduct(+params['id']))
@@ -38,7 +38,7 @@ export class ProductEditComponent implements OnInit {
     }
 
     public submit(): void {
-        if (!this.value) return;
+        if (!this.value) { return; }
 
         this._products.putProduct(this.value.id, this.value)
             .subscribe(
@@ -48,7 +48,7 @@ export class ProductEditComponent implements OnInit {
     }
 
     public cancel(): void {
-        if (!this.value) return;
+        if (!this.value) { return; }
 
         this._products.gotoList(this.value.categoryId);
     }

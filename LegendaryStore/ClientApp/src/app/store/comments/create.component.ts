@@ -1,16 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { Comment } from '../store.models';
-import { CommentsService } from './comments.service';
-
 @Component({
     selector: 'comment-create',
     template: `
         <form #form="ngForm" novalidate (submit)="submit()">
             <fieldset class="form-group">
                 <label for="comment" class="control-label">Your comment</label>
-                <textarea 
-                    [(ngModel)]="comment" 
+                <textarea
+                    [(ngModel)]="comment"
                     required
                     minlength="5"
                     maxlength="500"
@@ -21,13 +18,13 @@ import { CommentsService } from './comments.service';
                 </textarea>
             </fieldset>
             <div class="form-group">
-                <button type="submit" 
-                    [disabled]="form.invalid" 
+                <button type="submit"
+                    [disabled]="form.invalid"
                     class="btn btn-primary pull-right">
-                        <i class="fa fa-paper-plane"></i> 
+                        <i class="fa fa-paper-plane"></i>
                         Send
                 </button>
-                <a (click)="cancel()"
+                <a (click)="clear()"
                     *ngIf="comment"
                     class="btn btn-default">
                     Clear
@@ -41,13 +38,13 @@ export class CommentCreateComponent {
 
     @Output('post') onSubmit: EventEmitter<string>;
 
-    constructor(private _comments: CommentsService) { 
+    constructor() {
         this.clear();
         this.onSubmit = new EventEmitter();
     }
 
     public submit(): void {
-        if (!this.comment) return;
+        if (!this.comment) { return; }
 
         this.onSubmit.emit(this.comment);
         this.clear();

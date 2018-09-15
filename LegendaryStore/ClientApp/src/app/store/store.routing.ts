@@ -15,8 +15,8 @@ import { CommentCreateComponent } from './comments/create.component';
 import { FavoritesListComponent } from './favorites/list.component';
 
 const routes: Routes = [
-    { 
-        path: 'store', 
+    {
+        path: 'store',
         component: StoreComponent,
         children: [
             { path: 'cart', component: CartComponent },
@@ -38,8 +38,8 @@ const routes: Routes = [
         RouterModule
     ],
 })
-export class StoreRoutingModule { 
-    
+export class StoreRoutingModule {
+
 }
 
 export const storeComponents = [

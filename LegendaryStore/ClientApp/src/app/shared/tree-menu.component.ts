@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface ITreeMenuItem {    
+export interface ITreeMenuItem {
     id: number;
     name: string;
     parentId?: number;
@@ -29,7 +29,7 @@ export class TreeMenuComponent {
         <a [routerLink]="item.id">{{ item.name }}</a>
         <ul *ngIf="item.children">
             <li *ngFor="let child of item.children">
-                <tree-menu-item 
+                <tree-menu-item
                     [item]="child">
                 </tree-menu-item>
             </li>

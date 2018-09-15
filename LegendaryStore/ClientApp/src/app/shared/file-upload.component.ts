@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEventType } from '@angular/common/http';
 
 @Component({
     selector: 'file-upload',
@@ -109,7 +109,7 @@ export class FileUploadComponent {
     }
 
     private upload(files: File[]): void {
-        if (files.length === 0) return;
+        if (files.length === 0) { return; }
 
         const formData = new FormData();
 
@@ -133,7 +133,7 @@ export class FileUploadComponent {
     }
 
     private changeText(files: File[]): void {
-        if (files.length === 0) return;
+        if (files.length === 0) { return; }
 
         if (files.length > 1) {
             this.fileName = `Выбрано ${files.length} файла`;

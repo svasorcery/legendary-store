@@ -9,9 +9,9 @@ import { Product } from '../store.models';
     template: `
         <h3>New product</h3>
         <div class="col-md-offset-1 col-md-10">
-            <product-form 
-                [value]="value" 
-                (save)="submit($event)" 
+            <product-form
+                [value]="value"
+                (save)="submit($event)"
                 (cancel)="cancel()">
             </product-form>
         </div>
@@ -21,7 +21,7 @@ import { Product } from '../store.models';
 export class ProductCreateComponent implements OnInit {
     value: Product;
     categoryId: number;
-    
+
     constructor(
         private _products: ProductsService,
         private _route: ActivatedRoute
@@ -29,7 +29,7 @@ export class ProductCreateComponent implements OnInit {
         this.value = new Product();
     }
 
-    ngOnInit() { 
+    ngOnInit() {
         this._route.params
             .subscribe(
                 (params: Params) => this.categoryId = +params['categoryId']
@@ -37,7 +37,7 @@ export class ProductCreateComponent implements OnInit {
     }
 
     public submit(value: Product) {
-        if (!value) return;
+        if (!value) { return; }
 
         this.value = value;
         this._products.postProduct(this.value)

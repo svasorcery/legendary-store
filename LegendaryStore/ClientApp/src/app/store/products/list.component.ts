@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
-import { ProductsList, Product, Paging } from '../store.models';
+import {  Product, Paging } from '../store.models';
 import { ProductsService } from './products.service';
 
 @Component({
@@ -21,20 +22,20 @@ export class ProductsListComponent implements OnInit {
         private _route: ActivatedRoute,
     ) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this._route
-            .params        
-            .switchMap((params: Params) => {
+            .params
+            .pipe(switchMap((params: Params) => {
                 this.categoryId = +params['categoryId'];
-                var page: number;
+                let page: number;
                 this._route.queryParams.subscribe(queryParams => page = +queryParams['page']);
                 return this._products.getProducts(this.categoryId, page);
-            })
+            }))
             .subscribe(
                 result => {
                     this.items = result.items;
-                    this.paging = result.paging ? 
-                        Paging.getPaging(result.paging) : 
+                    this.paging = result.paging ?
+                        Paging.getPaging(result.paging) :
                         new Paging(1, result.items.length, 10);
                 },
                 error => console.log(error)
@@ -54,7 +55,7 @@ export class ProductsListComponent implements OnInit {
     }
 
     public deleteItem(item: Product) {
-        if(!item) return;
+        if(!item) { return; }
 
         if (confirm(`Вы действительно хотите удалить \'${item.name}\'?`)) { 
             this._products.deleteProduct(item);

@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { ProductsList, Product, ProductDetails } from '../store.models';
 
@@ -18,18 +19,18 @@ export class ProductsService {
         private _router: Router,
         private _http: HttpClient,
         @Inject('BASE_URL') baseUrl
-    ) { 
+    ) {
         this._url = baseUrl + 'api/products';
         this._productsSource = new ProductsListSource(_http, baseUrl);
     }
-    
+
     public getProducts = (categoryId: number, page: number = 1): Observable<ProductsList> =>
         this._http.get<ProductsList>(`${this._url}/by-category/${categoryId}?page=${page}`)
-            .delay(1000); // emulate remote server data fetching latency
-    
+            .pipe(delay(1000)) // emulate remote server data fetching latency
+
     public getProduct = (id: number): Observable<ProductDetails> =>
         this._http.get<ProductDetails>(`${this._url}/${id}`)
-            .delay(1000); // emulate remote server data fetching latency
+        .pipe(delay(1000)) // emulate remote server data fetching latency
 
     public postProduct = (value: Product): Observable<Product> =>
         this._http.post<Product>(`${this._url}`, value);
@@ -45,7 +46,7 @@ export class ProductsService {
                     window.location.reload();
                 },
                 error => console.log(error)
-            );
+            )
 
 
     public gotoList(categoryId: number): void {

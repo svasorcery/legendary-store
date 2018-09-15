@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'store',
@@ -11,7 +11,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         </h2>
 
         <modal [visible]="modal"
-            [closable]="true" 
+            [closable]="true"
             [header]="'Cart'"
             (visibleChange)="hideCart()">
             <cart></cart>

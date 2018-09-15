@@ -29,7 +29,7 @@ export class ErrorsHandler implements ErrorHandler {
             if (error.status === 403) {
                 router.navigate(['/forbidden']);
             }
-            let errorData = error.error.code ? error.error : ApiError.fromHttpErrorResponse(error);
+            const errorData = error.error.code ? error.error : ApiError.fromHttpErrorResponse(error);
             return notification.notify(errorData);
         } else {
             // Client Error happend

@@ -13,7 +13,7 @@ export class FavoritesListComponent implements OnInit {
 
     constructor(private _favs: FavoritesService) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this._favs.getItems()
             .subscribe(
                 result => this.items = result,
@@ -22,12 +22,12 @@ export class FavoritesListComponent implements OnInit {
     }
 
     public removeItem(item: Favorite) {
-        if (!item) return;
+        if (!item) { return; }
         if (confirm(`Вы действительно хотите удалить \'${item.product.name}\'?`)) {
             this._favs.removeItem(item.productId)
                 .subscribe(
                     result => {
-                        var index = this.items.indexOf(item);
+                        const index = this.items.indexOf(item);
                         this.items.splice(index, 1);
                     },
                     error => console.log(error)

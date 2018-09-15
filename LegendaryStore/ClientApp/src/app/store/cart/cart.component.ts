@@ -13,7 +13,7 @@ export class CartComponent implements OnInit {
 
     constructor(private _cart: CartService) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this._cart.getItems()
             .subscribe(
                 result => this.items = result,
@@ -22,13 +22,13 @@ export class CartComponent implements OnInit {
     }
 
     public removeItem(item: CartItem) {
-        if (!item) return;
+        if (!item) { return; }
 
         if (confirm(`Вы действительно хотите удалить \'${item.product.name}\'?`)) {
             this._cart.removeItem(item.productId)
                 .subscribe(
                     result => {
-                        var index = this.items.indexOf(item);
+                        const index = this.items.indexOf(item);
                         this.items.splice(index, 1);
                     },
                     error => console.log(error)

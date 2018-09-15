@@ -12,17 +12,17 @@ export enum RatingRate {
     selector: 'rating-bar',
     template: `
         <div *ngIf="readonly">
-            <rating-star *ngFor="let star of stars" 
-                [factor]="star" 
+            <rating-star *ngFor="let star of stars"
+                [factor]="star"
                 [ratingTotal]="ratingTotal"
                 style="color:goldenrod;">
             </rating-star>
         </div>
         <div *ngIf="!readonly">
-            <rating-star *ngFor="let star of stars" 
-                [factor]="star" 
+            <rating-star *ngFor="let star of stars"
+                [factor]="star"
                 [ratingTotal]="ratingTotal"
-                (click)="rate($event)" 
+                (click)="rate($event)"
                 style="color:grey; cursor:pointer">
             </rating-star>
         </div>
@@ -37,18 +37,18 @@ export class RatingBarComponent implements OnInit {
 
     stars: number[] = [];
 
-    constructor() { 
+    constructor() {
         this.onRate = new EventEmitter();
     }
 
     ngOnInit() {
-        for (var star = 1; star <= this.count; star++) {
+        for (let star = 1; star <= this.count; star++) {
             this.stars.push(star);
         }
     }
 
     rate(rating: RatingRate) {
-        if (!rating) return;
+        if (!rating) { return; }
 
         this.onRate.emit(rating);
     }
@@ -58,10 +58,10 @@ export class RatingBarComponent implements OnInit {
 @Component({
     selector: 'rating-star',
     template: `
-        <i (click)="click()" 
-            class="fa" 
-            [class.fa-star-o]="fill==='none'" 
-            [class.fa-star-half-o]="fill==='half'" 
+        <i (click)="click()"
+            class="fa"
+            [class.fa-star-o]="fill==='none'"
+            [class.fa-star-half-o]="fill==='half'"
             [class.fa-star]="fill==='full'">
         </i>
     `
@@ -78,13 +78,13 @@ export class RatingStarComponent implements OnChanges {
     }
 
     ngOnChanges() {
-        this.fill = this.ratingTotal >= this.factor ? 
+        this.fill = this.ratingTotal >= this.factor ?
             'full' : this.factor - this.ratingTotal < 1 ?
                 'half' : 'none';
     }
 
     click() {
-        if (!this.factor) return;
+        if (!this.factor) { return; }
         this.onClick.emit(this.factor);
     }
 }
