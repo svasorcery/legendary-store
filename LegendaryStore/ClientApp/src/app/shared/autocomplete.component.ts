@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable, Subscription, Subject } from 'rxjs';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/switchMap';
+import { switchMap, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export interface IAutoCompleteListSource {
     search(term: string): Observable<{ name: string }[]>;
@@ -34,7 +32,52 @@ export interface IAutoCompleteListSource {
             </ul>
         </div>
     `,
-    styleUrls: [ 'shared.styles.css' ],
+    styles: [`
+        input::-ms-clear {
+            display: none;
+        }
+        .autocomplete {
+            position: relative;
+        }
+        .open input {
+            border-color: white;
+            z-index: 2001;
+        }
+        .open input:focus {
+            border-color: white;
+            box-shadow: none;
+        }
+        .list-group {
+            top: 0px;
+            position:absolute;
+            width: 100%;
+            z-index: 1000;
+            border: 1px solid #4189c7;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(red(#4189c7), green(#4189c7), blue(#4189c7), .6);
+        }
+        .list-group-item:first-child {
+            margin-top: 34px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .list-group-item {
+            cursor:pointer;
+            padding-left: 12px;
+            border-color: transparent;
+            border-top-color: gray;
+        }
+        .fa {
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            font-size: 150%;
+        }
+        .list-group-item:hover, .list-group-item.hover {
+            border-color: #4189c7;
+            background: #4189c7;
+            color: white;
+        }
+    `],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -68,15 +111,15 @@ export class AutoCompleteComponent implements OnInit, OnDestroy, ControlValueAcc
 
     ngOnInit(): void {
         this.sub = this.searchTermStream
-            .debounceTime(this.debounceTime)
-            .distinctUntilChanged()
-            .filter((term: string) => term.length >= this.minTermLength)
-            .switchMap((term: string) => {
-                this.loading = true;
-                this.hasError = false;
-                return this.source.search(term);
-            })
-            .subscribe(
+            .pipe(debounceTime(this.debounceTime))
+            .pipe(distinctUntilChanged())
+            .pipe(filter((term: string) => term.length >= this.minTermLength))
+            .pipe(switchMap((term: string) => {
+                    this.loading = true;
+                    this.hasError = false;
+                    return this.source.search(term);
+                })
+            ).subscribe(
                 items => {
                     if (this.nonInteractiveSearch) {
                         this.nonInteractiveSearch = false;
