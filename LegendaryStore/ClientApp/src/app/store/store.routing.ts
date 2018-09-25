@@ -14,6 +14,8 @@ import { CommentsListComponent } from './comments/list.component';
 import { CommentCreateComponent } from './comments/create.component';
 import { FavoritesListComponent } from './favorites/list.component';
 
+import { ProductResolver } from './products/products.resolver';
+
 const routes: Routes = [
     {
         path: 'store',
@@ -21,11 +23,47 @@ const routes: Routes = [
         children: [
             { path: 'cart', component: CartComponent },
             { path: 'favorites', component: FavoritesListComponent },
-            { path: 'categories', component: CategoriesTreeComponent },
-            { path: 'categories/:categoryId', component: ProductsListComponent },
-            { path: 'categories/:categoryId/products/create', component: ProductCreateComponent },
-            { path: 'categories/:categoryId/products/:id', component: ProductDetailsComponent },
-            { path: 'categories/:categoryId/products/:id/edit', component: ProductEditComponent },
+            {
+                path: 'categories',
+                children: [
+                    {
+                        path: '',
+                        component: CategoriesTreeComponent
+                    },
+                    {
+                        path: ':categoryId',
+                        children: [
+                            {
+                                path: '',
+                                component: ProductsListComponent
+                            },
+                            {
+                                path: 'products',
+                                children: [
+                                    {
+                                        path: 'create',
+                                        component: ProductCreateComponent
+                                    },
+                                    {
+                                        path: ':id',
+                                        resolve: { product: ProductResolver },
+                                        children: [
+                                            {
+                                                path: '',
+                                                component: ProductDetailsComponent
+                                            },
+                                            {
+                                                path: 'edit',
+                                                component: ProductEditComponent
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
     },
 ];

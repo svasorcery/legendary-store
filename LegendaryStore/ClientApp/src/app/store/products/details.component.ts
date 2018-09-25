@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 import { ProductDetails, RatingRate } from '../store.models';
-import { ProductsService } from './products.service';
 import { CartService } from '../cart/cart.service';
 import { FavoritesService } from '../favorites/favorites.service';
 import { RatingsService } from '../ratings/ratings.service';
@@ -17,7 +15,6 @@ export class ProductDetailsComponent implements OnInit {
     @Input() value: ProductDetails;
 
     constructor(
-        private _products: ProductsService,
         private _cart: CartService,
         private _favs: FavoritesService,
         private _ratings: RatingsService,
@@ -26,11 +23,9 @@ export class ProductDetailsComponent implements OnInit {
 
     ngOnInit() {
         if (!this.value) {
-            this._route
-                .params
-                .pipe(switchMap((params: Params) => this._products.getProduct(+params['id'])))
+            this._route.data
                 .subscribe(
-                    result => this.value = result,
+                    (data: { product: ProductDetails }) => this.value = data.product,
                     error => console.log(error)
                 );
         }

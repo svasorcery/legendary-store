@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
-import { Product } from '../store.models';
+import { Product, ProductDetails } from '../store.models';
 import { ProductsService } from './products.service';
 
 @Component({
@@ -29,11 +28,9 @@ export class ProductEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._route
-            .params
-            .pipe(switchMap((params: Params) => this._products.getProduct(+params['id'])))
+        this._route.data
             .subscribe(
-                result => this.value = result.product,
+                (data: { product: ProductDetails }) => this.value = data.product.product,
                 error => console.log(error)
             );
     }
