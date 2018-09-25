@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 import { Comment } from '../store.models';
 
@@ -18,7 +17,6 @@ export class CommentsService {
 
     public getCommentsForProduct = (productId: number): Observable<Comment[]> =>
         this._http.get<Comment[]>(`${this._url}/${productId}`)
-            .pipe(delay(1000)) // emulate remote server data fetching latency
 
     public postComment = (productId: number, content: string): Observable<Comment> =>
         this._http.post<Comment>(`${this._url}/${productId}`, { content: content })

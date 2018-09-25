@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 import { ProductsList, Product, ProductDetails } from '../store.models';
 
@@ -26,17 +25,15 @@ export class ProductsService {
 
     public getProducts = (categoryId: number, page: number = 1): Observable<ProductsList> =>
         this._http.get<ProductsList>(`${this._url}/by-category/${categoryId}?page=${page}`)
-            .pipe(delay(1000)) // emulate remote server data fetching latency
 
     public getProduct = (id: number): Observable<ProductDetails> =>
         this._http.get<ProductDetails>(`${this._url}/${id}`)
-        .pipe(delay(1000)) // emulate remote server data fetching latency
 
     public postProduct = (value: Product): Observable<Product> =>
-        this._http.post<Product>(`${this._url}`, value);
+        this._http.post<Product>(`${this._url}`, value)
 
     public putProduct = (id: number, value: Product): Observable<Product> =>
-        this._http.put<Product>(`${this._url}/${id}`, value);
+        this._http.put<Product>(`${this._url}/${id}`, value)
 
     public deleteProduct = (item: Product): any =>
         this._http.delete(`${this._url}/${item.id}`)
@@ -72,6 +69,8 @@ import { IAutoCompleteListSource } from '../../shared/autocomplete.component';
 export class ProductsListSource implements IAutoCompleteListSource {
     constructor(private http: HttpClient, private baseUrl: string) { }
     search = (term: string): Observable<{ name: string }[]> =>
-        this.http.get<Product[]>(this.baseUrl + 'api/products/search', 
-            { params: new HttpParams().set('term', term) });
+        this.http.get<Product[]>(
+            this.baseUrl + 'api/products/search',
+            { params: new HttpParams().set('term', term) }
+        )
 }

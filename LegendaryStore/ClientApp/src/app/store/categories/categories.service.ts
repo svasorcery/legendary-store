@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/';
-import { delay } from 'rxjs/operators';
 
 import { CategoryMenuItem } from '../store.models';
 
@@ -18,5 +17,4 @@ export class CategoriesService {
 
     public getCategoriesMenuTree = (): Observable<CategoryMenuItem[]> =>
         this._http.get<CategoryMenuItem[]>(this._url)
-            .pipe(delay(1000)) // emulate remote server data fetching latency
 }
