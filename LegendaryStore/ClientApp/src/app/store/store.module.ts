@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { StoreRoutingModule, storeComponents } from './store.routing';
 import { CategoriesService } from './categories/categories.service';
+import { CategoryResolver } from './categories/categories.resolver';
 import { ProductsService } from './products/products.service';
 import { ProductResolver } from './products/products.resolver';
 import { CartService } from './cart/cart.service';
@@ -26,6 +27,7 @@ import { RatingsService } from './ratings/ratings.service';
     ],
     providers: [
         CategoriesService,
+        CategoryResolver,
         ProductsService,
         ProductResolver,
         CartService,

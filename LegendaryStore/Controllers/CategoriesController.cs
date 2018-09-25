@@ -18,11 +18,20 @@ namespace LegendaryStore.Controllers
         }
 
 
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             var tree = await _db.GetCategoriesMenuTreeAsync();
 
             return Ok(tree);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get([FromRoute]int id)
+        {
+            var model = await _db.GetCategoryAsync(id);
+
+            return Ok(model);
         }
     }
 }

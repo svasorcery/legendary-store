@@ -14,6 +14,7 @@ import { CommentsListComponent } from './comments/list.component';
 import { CommentCreateComponent } from './comments/create.component';
 import { FavoritesListComponent } from './favorites/list.component';
 
+import { CategoryResolver } from './categories/categories.resolver';
 import { ProductResolver } from './products/products.resolver';
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
                     },
                     {
                         path: ':categoryId',
+                        resolve: { category: CategoryResolver },
                         children: [
                             {
                                 path: '',

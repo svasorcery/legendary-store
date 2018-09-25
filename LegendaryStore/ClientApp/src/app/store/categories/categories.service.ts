@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/';
+import { Observable } from 'rxjs';
 
-import { CategoryMenuItem } from '../store.models';
+import { CategoryMenuItem, Category } from '../store.models';
 
 @Injectable()
 export class CategoriesService {
@@ -17,4 +17,7 @@ export class CategoriesService {
 
     public getCategoriesMenuTree = (): Observable<CategoryMenuItem[]> =>
         this._http.get<CategoryMenuItem[]>(this._url)
+
+    public getCategory = (id: number): Observable<Category> =>
+        this._http.get<Category>(`${this._url}/${id}`)
 }
