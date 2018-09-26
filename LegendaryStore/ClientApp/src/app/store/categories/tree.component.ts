@@ -17,7 +17,7 @@ export class CategoriesTreeComponent implements OnInit {
     constructor(private _categories: CategoriesService) { }
 
     ngOnInit() {
-        this._categories.getCategoriesMenuTree()
+        this._categories.getRootCategoriesChildsTree()
         .subscribe(
             result => this.items = result,
             error => console.log(error)

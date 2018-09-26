@@ -34,18 +34,18 @@ namespace LegendaryStore.Controllers
             return Ok(model);
         }
 
-        [HttpGet("{id:int}/children")]
-        public async Task<IActionResult> Children(int id)
+        [HttpGet("{id:int}/parents")]
+        public async Task<IActionResult> Parents(int id)
         {
-            var tree = await _db.GetCategoryChildsTreeAsync(id);
+            var tree = await _db.GetCategoryParentsListAsync(id);
 
             return Ok(tree);
         }
 
-        [HttpGet("{id:int}/parents")]
-        public async Task<IActionResult> Parents(int id)
+        [HttpGet("{id:int}/children")]
+        public async Task<IActionResult> Children(int id)
         {
-            var tree = await _db.GetCategoryParentsTreeAsync(id);
+            var tree = await _db.GetCategoryChildsTreeAsync(id);
 
             return Ok(tree);
         }

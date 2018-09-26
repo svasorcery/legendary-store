@@ -15,9 +15,15 @@ export class CategoriesService {
         this._url = baseUrl + 'api/categories';
     }
 
-    public getCategoriesMenuTree = (): Observable<CategoryMenuItem[]> =>
+    public getRootCategoriesChildsTree = (): Observable<CategoryMenuItem[]> =>
         this._http.get<CategoryMenuItem[]>(this._url)
 
     public getCategory = (id: number): Observable<Category> =>
         this._http.get<Category>(`${this._url}/${id}`)
+
+    public getCategoryParentsList = (id: number): Observable<Category[]> =>
+        this._http.get<Category[]>(`${this._url}/${id}/parents`)
+
+    public getCategoryChildsTree = (id: number): Observable<CategoryMenuItem[]> =>
+        this._http.get<CategoryMenuItem[]>(`${this._url}/${id}/children`)
 }

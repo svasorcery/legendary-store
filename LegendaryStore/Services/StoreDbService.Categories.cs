@@ -63,7 +63,7 @@ namespace LegendaryStore.Services
                 .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<CategoryListItem>> GetCategoryParentsTreeAsync(int id)
+        public async Task<IEnumerable<CategoryListItem>> GetCategoryParentsListAsync(int id)
         {
             var allCategories = await _storeDb.Categories.ToArrayAsync();
             var root = allCategories.FirstOrDefault(c => c.Id == id);
