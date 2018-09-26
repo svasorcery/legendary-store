@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-import {  Product, Paging } from '../store.models';
+import { Product, Paging } from '../store.models';
 import { ProductsService } from './products.service';
+import { byAsc, byDesc } from '../../shared/sort.function';
 
 @Component({
     selector: 'products-list',
@@ -15,10 +16,10 @@ export class ProductsListComponent implements OnInit {
     categoryId: number;
     paging: Paging;
     sortBy: string = null;
+    sortAsc: boolean = true;
 
     constructor(
         private _products: ProductsService,
-        private _router: Router,
         private _route: ActivatedRoute,
     ) { }
 
@@ -42,6 +43,12 @@ export class ProductsListComponent implements OnInit {
             );
     }
 
+    public sort(key: string) {
+        this.sortAsc = !this.sortBy || key === this.sortBy ? !this.sortAsc : true;
+        this.sortBy = key;
+        this.items.sort(this.sortAsc ? byAsc(key) : byDesc(key));
+    }
+
     public selectItem(id: number) {
         this._products.gotoItem(this.categoryId, id);
     }
@@ -55,25 +62,10 @@ export class ProductsListComponent implements OnInit {
     }
 
     public deleteItem(item: Product) {
-        if(!item) { return; }
+        if (!item) { return; }
 
-        if (confirm(`Вы действительно хотите удалить \'${item.name}\'?`)) { 
+        if (confirm(`Вы действительно хотите удалить \'${item.name}\'?`)) {
             this._products.deleteProduct(item);
         }
     }
-
-
-    public sort(kind: string) {
-        this.items.sort(this.sortFn[kind]);
-        this.sortBy = kind;
-    }
-
-    private sortFn = {
-        name: function(a: Product, b: Product) {
-            return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
-        },
-        price: function(a: Product, b: Product) {
-            return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
-        }
-    };
 }

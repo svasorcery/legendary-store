@@ -9,13 +9,19 @@
             <th>
                 <a (click)="sort('name')" style="cursor:pointer">
                     Name
-                    <i *ngIf="sortBy=='name'" class="fa fa-arrow-down"></i>
+                    <i *ngIf="sortBy==='name'">
+                        <i *ngIf="sortAsc" class="fa fa-arrow-down"></i>
+                        <i *ngIf="!sortAsc" class="fa fa-arrow-up"></i>
+                    </i>
                 </a>
             </th>
             <th>
                 <a (click)="sort('price')" style="cursor:pointer">
                     Price
-                    <i *ngIf="sortBy=='price'" class="fa fa-arrow-down"></i>
+                    <i *ngIf="sortBy==='price'">
+                        <i *ngIf="sortAsc" class="fa fa-arrow-down"></i>
+                        <i *ngIf="!sortAsc" class="fa fa-arrow-up"></i>
+                    </i>
                 </a>
             </th>
             <th>Quantity</th>
@@ -33,7 +39,7 @@
             <td>{{ p.quantity }}</td>
             <td>
                 <i (click)="editItem(p.id)" class="fa fa-edit" style="cursor:pointer"></i> | 
-                <i (click)="deleteItem(p)" class="fa fa-trash" style="cursor:pointer"></i>
+                <i (click)="deleteItem(p)" class="fa fa-trash-o" style="cursor:pointer"></i>
             </td>
         </tr>
     </tbody>
