@@ -24,8 +24,8 @@
                 {{ ci.product.name }}
             </td>
             <td>{{ ci.quantity }}</td>
-            <td>{{ ci.pricePerUnit | currency:'USD':true:'1.2-2' }}</td>
-            <td>{{ ci.priceTotal | currency:'USD':true:'1.2-2' }}</td>
+            <td>{{ ci.pricePerUnit | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td>{{ ci.priceTotal | currency:'USD':'symbol':'1.2-2' }}</td>
             <td>
                 <i (click)="removeItem(ci)" class="fa fa-trash-o" style="cursor:pointer"></i>
             </td>

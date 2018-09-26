@@ -35,7 +35,7 @@
                 <img [src]="p.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
                 {{ p.name }}
             </td>
-            <td>{{ p.price | currency:'USD':true:'1.2-2' }}</td>
+            <td>{{ p.price | currency:'USD':'symbol':'1.2-2' }}</td>
             <td>{{ p.quantity }}</td>
             <td>
                 <i (click)="editItem(p.id)" class="fa fa-edit" style="cursor:pointer"></i> | 

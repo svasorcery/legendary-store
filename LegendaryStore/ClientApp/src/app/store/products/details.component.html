@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-2 text-right">
             <h3 class="text-info">
-                {{ value.product.price | currency:'USD':true}}
+                {{ value.product.price | currency:'USD':'symbol':'1.2-2'}}
             </h3><br />
             <div class="fa-2x">
                 <div>Rating: {{ value.ratingTotal | number:'1.2-2' }}</div>
