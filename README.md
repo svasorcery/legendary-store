@@ -6,4 +6,4 @@ Backend:
 - Entity Framework
 
 Frontend: 
-- Angular 5
+- Angular 6
