@@ -12,6 +12,8 @@ import { ModalComponent } from './modal.component';
 import { RatingBarComponent, RatingStarComponent } from './rating-bar.component';
 import { FileUploadComponent } from './file-upload.component';
 
+import { SafePipe } from './safe.pipe';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -27,7 +29,9 @@ import { FileUploadComponent } from './file-upload.component';
         TreeMenuComponent,
         ModalComponent,
         RatingBarComponent, RatingStarComponent,
-        FileUploadComponent
+        FileUploadComponent,
+
+        SafePipe
     ],
     providers: [
 
@@ -41,7 +45,9 @@ import { FileUploadComponent } from './file-upload.component';
         TreeMenuComponent,
         ModalComponent,
         RatingBarComponent,
-        FileUploadComponent
+        FileUploadComponent,
+
+        SafePipe
     ],
 })
 export class SharedModule {
