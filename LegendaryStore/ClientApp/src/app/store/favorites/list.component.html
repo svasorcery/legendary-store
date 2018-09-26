@@ -17,7 +17,7 @@
     <tbody>
         <tr *ngFor="let fav of items" style="cursor:pointer">
             <td>
-                <img [src]="fav.product.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
+                <img [attr.src]="fav.product.imageUrl | safe:'url'" style="width:50px; margin-right:20px" class="img-rounded" />
                 {{ fav.product.name }}
             </td>
             <td>

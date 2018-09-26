@@ -3,7 +3,7 @@
 <div *ngIf="value">
     <div class="well">
         <div class="col-md-2">
-            <img [src]="value.product.imageUrl" alt="Photo" class="img-responsive img-rounded" />
+            <img [attr.src]="value.product.imageUrl | safe:'url'" alt="Photo" class="img-responsive img-rounded" />
         </div>
         <div class="col-md-8">
             <h3>{{ value.product.name }}</h3>

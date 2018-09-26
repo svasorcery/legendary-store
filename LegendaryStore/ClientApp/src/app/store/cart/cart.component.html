@@ -20,7 +20,7 @@
     <tbody>
         <tr *ngFor="let ci of items" style="cursor:pointer">
             <td>
-                <img [src]="ci.product.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
+                <img [attr.src]="ci.product.imageUrl | safe:'url'" style="width:50px; margin-right:20px" class="img-rounded" />
                 {{ ci.product.name }}
             </td>
             <td>{{ ci.quantity }}</td>

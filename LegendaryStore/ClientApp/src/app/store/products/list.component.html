@@ -32,7 +32,7 @@
         <tr *ngFor="let p of items" style="cursor:pointer">
             <td><input type="checkbox" /></td>
             <td (click)="selectItem(p.id)">
-                <img [src]="p.imageUrl" style="width:50px; margin-right:20px" class="img-rounded" />
+                <img [attr.src]="p.imageUrl | safe:'url'" style="width:50px; margin-right:20px" class="img-rounded" />
                 {{ p.name }}
             </td>
             <td>{{ p.price | currency:'USD':'symbol':'1.2-2' }}</td>

@@ -19,7 +19,7 @@
         </div>
         <div *ngIf="value.imageUrl" style="max-height:300px; max-width:200px;">
             <a [href]="value.imageUrl" target="_blank" class="thumbnail">
-                <img [src]="value.imageUrl" />
+                <img [attr.src]="value.imageUrl | safe:'url'" />
             </a>
         </div>
     </div>

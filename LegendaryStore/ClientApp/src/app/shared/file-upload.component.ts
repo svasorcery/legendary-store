@@ -26,7 +26,7 @@ import { HttpClient, HttpRequest, HttpEventType } from '@angular/common/http';
         <div *ngIf="preview && urls" class="row col-md-12">
             <span *ngFor="let url of urls" class="col-md-1">
                 <a [href]="url" target="_blank" class="thumbnail" height="100px">
-                    <img [src]="url" />
+                    <img [attr.src]="url | safe:'url'" />
                 </a>
             </span>
         </div>
