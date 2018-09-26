@@ -63,20 +63,55 @@ namespace LegendaryStore.Services
                 .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<CategoryMenuItem>> GetCategoriesMenuTreeAsync()
+        public async Task<IEnumerable<CategoryListItem>> GetCategoryParentsTreeAsync(int id)
         {
-            var items = await GetCategoriesAsync();
+            var allCategories = await _storeDb.Categories.ToArrayAsync();
+            var root = allCategories.FirstOrDefault(c => c.Id == id);
+            var tree = SeedParentsTree(root);
+            return tree.Select(x => new CategoryListItem(x.Id, x.Name));
+        }
 
-            var roots = items.Where(c => c.ParentId == null);
-
-            var tree = roots.Select(root => SeedTree(root, items));
-
+        public async Task<IEnumerable<CategoryMenuItem>> GetCategoryChildsTreeAsync(int id)
+        {
+            var allCategories = await GetCategoriesAsync();
+            var roots = allCategories.Where(c => c.ParentId == id);
+            var tree = roots.Select(root => SeedChildsTree(root, allCategories));
             return tree;
         }
 
-        private CategoryMenuItem SeedTree(Category category, IEnumerable<Category> list)
+        public async Task<IEnumerable<CategoryMenuItem>> GetRootCategoriesChildsTreeAsync()
         {
-            var menuItem = new CategoryMenuItem
+            var allCategories = await GetCategoriesAsync();
+            var roots = allCategories.Where(c => c.ParentId == null);
+            var tree = roots.Select(root => SeedChildsTree(root, allCategories));
+            return tree;
+        }
+
+
+        private IEnumerable<Category> SeedParentsTree(Category category)
+        {
+            var parents = new List<Category>();
+
+            AddParent(category, parents);
+
+            return parents;
+        }
+
+        private IEnumerable<Category> AddParent(Category category, ICollection<Category> parents)
+        {
+            parents.Add(category);
+
+            if (category.ParentId != null)
+            {
+                AddParent(category.Parent, parents);
+            }
+
+            return parents;
+        }
+
+        private CategoryMenuItem SeedChildsTree(Category category, IEnumerable<Category> sourceItems)
+        {
+            var item = new CategoryMenuItem
             {
                 Id = category.Id,
                 Name = category.Name,
@@ -84,18 +119,18 @@ namespace LegendaryStore.Services
                 Children = category.Children == null ? null : new List<CategoryMenuItem>()
             };
 
-            if (!list.Select(x => x.ParentId).Contains(category.Id))
+            if (!sourceItems.Select(x => x.ParentId).Contains(category.Id))
             {
-                return menuItem;
+                return item;
             }
 
-            foreach (var child in list.Where(x => x.ParentId == category.Id))
+            foreach (var child in sourceItems.Where(x => x.ParentId == category.Id))
             {
-                var grandChild = SeedTree(child, list);
-                menuItem.Children.Add(grandChild);
+                var grandChild = SeedChildsTree(child, sourceItems);
+                item.Children.Add(grandChild);
             }
 
-            return menuItem;
+            return item;
         }
     }
 }

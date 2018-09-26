@@ -21,7 +21,7 @@ namespace LegendaryStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var tree = await _db.GetCategoriesMenuTreeAsync();
+            var tree = await _db.GetRootCategoriesChildsTreeAsync();
 
             return Ok(tree);
         }
@@ -32,6 +32,22 @@ namespace LegendaryStore.Controllers
             var model = await _db.GetCategoryAsync(id);
 
             return Ok(model);
+        }
+
+        [HttpGet("{id:int}/children")]
+        public async Task<IActionResult> Children(int id)
+        {
+            var tree = await _db.GetCategoryChildsTreeAsync(id);
+
+            return Ok(tree);
+        }
+
+        [HttpGet("{id:int}/parents")]
+        public async Task<IActionResult> Parents(int id)
+        {
+            var tree = await _db.GetCategoryParentsTreeAsync(id);
+
+            return Ok(tree);
         }
     }
 }
