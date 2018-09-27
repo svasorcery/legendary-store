@@ -34,31 +34,28 @@ const routes: Routes = [
                     {
                         path: ':categoryId',
                         resolve: { category: CategoryResolver },
+                        data: { breadcrumb: { key: 'category', values: ['name'] } },
                         children: [
                             {
                                 path: '',
                                 component: ProductsListComponent
                             },
                             {
-                                path: 'products',
+                                path: 'products/create',
+                                component: ProductCreateComponent
+                            },
+                            {
+                                path: 'products/:id',
+                                resolve: { product: ProductResolver },
+                                data: { breadcrumb: { key: 'product', values: ['product.name'] } },
                                 children: [
                                     {
-                                        path: 'create',
-                                        component: ProductCreateComponent
+                                        path: '',
+                                        component: ProductDetailsComponent
                                     },
                                     {
-                                        path: ':id',
-                                        resolve: { product: ProductResolver },
-                                        children: [
-                                            {
-                                                path: '',
-                                                component: ProductDetailsComponent
-                                            },
-                                            {
-                                                path: 'edit',
-                                                component: ProductEditComponent
-                                            }
-                                        ]
+                                        path: 'edit',
+                                        component: ProductEditComponent
                                     }
                                 ]
                             }
