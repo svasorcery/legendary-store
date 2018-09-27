@@ -1,0 +1,13 @@
+<section *ngIf="visible" class="breadcrumbs">
+    <div class="breadcrumbs-wrapper">
+        <ul class="breadcrumbs-list">
+            <li *ngIf="showHome">
+                <a routerLink="/">Home</a>
+            </li>
+            <li *ngFor="let bc of breadcrumbs">
+                <!--<a [routerLink]="[bc.url]">{{ bc.label }}</a>-->
+                <a>{{ bc.label }}</a>
+            </li>
+        </ul>
+    </div>
+</section>

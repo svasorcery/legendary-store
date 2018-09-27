@@ -1,0 +1,63 @@
+.breadcrumbs {
+    width: 100%;
+    background: #222;
+}
+
+.breadcrumbs-wrapper {
+    width: unset;
+    margin: 0 auto;
+    padding: 7px 15px;
+    font-size: 0;
+}
+
+.breadcrumbs-list {
+    display: inline-block;
+}
+
+.breadcrumbs-list li {
+    position: relative;
+    display: inline-block;
+    padding: 3px 20px;
+}
+
+.breadcrumbs-list li a {
+    display: inline-block;
+    font-family: "Lato-Regular";
+    font-size: 16px;
+    line-height: 21px;
+    color: #9d9d9d;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.breadcrumbs-list>li>a>span {
+    border-bottom: 1px solid;
+}
+
+.breadcrumbs-list>li>a>span:hover {
+    border-bottom: 0;
+}
+
+.breadcrumbs-list li::before {
+    position: absolute;
+    content: "";
+    right: 0px;
+    top: 0px;
+    width: 15px;
+    height: 25px;
+    background: url(../../assets/img/next.svg) center center no-repeat;
+}
+
+.breadcrumbs-list li:first-child {
+    padding-left: 0px;
+}
+
+.breadcrumbs-list li:last-child::before {
+    position: absolute;
+    content: "";
+    right: 0px;
+    top: 0px;
+    width: 0px;
+    height: 0px;
+    background: none;
+}

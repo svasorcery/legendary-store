@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { BreadcrumbComponent } from './nav-menu/breadcrumb.component';
 import { HomeComponent } from './home/home.component';
 
 
@@ -28,5 +29,6 @@ export class AppRoutingModule {
 export const appComponents = [
     AppComponent,
     NavMenuComponent,
+    BreadcrumbComponent,
     HomeComponent
 ];
