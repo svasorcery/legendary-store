@@ -19,7 +19,8 @@
                     [ratingTotal]="ratingTotal" 
                     [count]="5"
                     [readonly]="value.ratingByUser"
-                    (rate)="rate($event)"></rating-bar>
+                    (rate)="rate($event)">
+                </rating-bar>
             </div><br />
             <div style="cursor:pointer" class="fa-3x">
                 <i (click)="removeFromFavorites()" *ngIf="value.isFavorite" class="fa fa-heart text-danger"></i>

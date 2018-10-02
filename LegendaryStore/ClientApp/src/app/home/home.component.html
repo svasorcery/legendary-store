@@ -9,14 +9,16 @@
     </label>
     <div class="col-md-6">
         <autocomplete 
+            [(ngModel)]="product"
             [source]="products.productsSource"
             [placeholder]="'Start to type a product name'"
-            (select)="getProductDetails($event.id)">
+            (ngModelChange)="getProductDetails($event.id)"
+            name="details">
         </autocomplete>
     </div><br><br>
 </div>
 
 <product-details 
-    *ngIf="product"
-    [value]="product">
+    *ngIf="details"
+    [value]="details">
 </product-details>

@@ -4,7 +4,7 @@ import { UserService } from '../user.service';
 import { UserInfo } from '../app.models';
 
 import { ProductsService } from '../store/products/products.service';
-import { ProductDetails } from '../store/store.models';
+import { Product, ProductDetails } from '../store/store.models';
 
 @Component({
     selector: 'home',
@@ -12,7 +12,8 @@ import { ProductDetails } from '../store/store.models';
 })
 export class HomeComponent implements OnInit {
     userInfo: UserInfo;
-    product: ProductDetails;
+    product: Product;
+    details: ProductDetails;
 
     constructor(
         private _user: UserService,
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
     getProductDetails(id: number) {
         this.products.getProduct(id)
             .subscribe(
-                result => this.product = result,
+                result => this.details = result,
                 error => console.log(error)
             );
     }
