@@ -41,10 +41,10 @@ namespace LegendaryStore.Controllers
                 Items = items,
                 Paging = new Paging
                 {
-                    Page = page,
+                    ActualPage = page,
                     TotalItems = totalCount,
-                    ItemsPerPage = itemsPerPage,
-                    TotalPages = (int)Math.Ceiling((double)totalCount / itemsPerPage)
+                    TotalPages = (int)Math.Ceiling((double)totalCount / itemsPerPage),
+                    ItemsPage = itemsPerPage
                 }
             };
 

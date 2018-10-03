@@ -1,3 +1,6 @@
+import { IPager } from '../shared/pager.component';
+export { IPager } from '../shared/pager.component';
+
 export class CategoryMenuItem {
     id: number;
     name: string;
@@ -31,7 +34,7 @@ export class ProductDetails {
 export class ProductsList {
     categoryName: string;
     items: Product[];
-    paging: Paging;
+    paging: IPager;
 }
 
 export class Favorite {
@@ -76,22 +79,19 @@ export class Paging {
         public totalItems: number,
         public itemsPerPage: number,
         totalPages?: number
-    ) { 
+    ) {
         this.totalPages = totalPages ? totalPages : this.totalItems / this.itemsPerPage;
     }
 
     public get pages(): number[] {
-        var pages = []; 
-        for (var i = 1; i <= this.totalPages; i++) { 
-            pages.push(i); 
+        let pages = [];
+        for (let i = 1; i <= this.totalPages; i++) {
+            pages.push(i);
         }
         return pages;
     }
 
-    public static getPaging(p: Paging) {
-        var result = new Paging(p.page, p.totalItems, p.itemsPerPage, p.totalPages);
-        return result;
-    }
+    public static getPaging = (p: Paging) => new Paging(p.page, p.totalItems, p.itemsPerPage, p.totalPages);
 }
 
 export class CartItem {
@@ -103,7 +103,7 @@ export class CartItem {
         public pricePerUnit: number,
         public priceCalculatedAt: number
     ) { }
-    
+
     public get priceTotal(): number {
         return this.quantity * this.pricePerUnit;
     }
