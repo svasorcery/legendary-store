@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-import { Product, Paging } from '../store.models';
+import { Product, IPager } from '../store.models';
 import { ProductsService } from './products.service';
 import { byAsc, byDesc } from '../../shared/sort.function';
 
@@ -14,7 +14,7 @@ import { byAsc, byDesc } from '../../shared/sort.function';
 export class ProductsListComponent implements OnInit {
     items: Product[];
     categoryId: number;
-    paging: Paging;
+    paginationInfo: IPager;
     sortBy: string = null;
     sortAsc: boolean = true;
 
@@ -35,9 +35,9 @@ export class ProductsListComponent implements OnInit {
             .subscribe(
                 result => {
                     this.items = result.items;
-                    this.paging = result.paging ?
+                    this.paginationInfo = result.paging /*?
                         Paging.getPaging(result.paging) :
-                        new Paging(1, result.items.length, 10);
+                        new Paging(1, result.items.length, 10)*/;
                 },
                 error => console.log(error)
             );
@@ -47,6 +47,20 @@ export class ProductsListComponent implements OnInit {
         this.sortAsc = !this.sortBy || key === this.sortBy ? !this.sortAsc : true;
         this.sortBy = key;
         this.items.sort(this.sortAsc ? byAsc(key) : byDesc(key));
+    }
+
+    public onPageChanged(value: any): any {
+        event.preventDefault();
+        this.paginationInfo.actualPage = value;
+        this._products.getProducts(this.categoryId, value).subscribe(
+            result => {
+                this.items = result.items;
+                this.paginationInfo = result.paging /*?
+                    Paging.getPaging(result.paging) :
+                    new Paging(1, result.items.length, 10)*/;
+            },
+            error => console.log(error)
+        );
     }
 
     public selectItem(id: number) {
