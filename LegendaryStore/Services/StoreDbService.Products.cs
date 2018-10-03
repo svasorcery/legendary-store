@@ -3,35 +3,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LegendaryStore.Entities;
+using LegendaryStore.Common;
 
 namespace LegendaryStore.Services
 {
     public partial class StoreDbService
     {
-        public Task<Product[]> SearchProductsAsync(string term)
+        public async Task<IPagedList<Product>> SearchProductsAsync(string term,int page,int itemsPerPage)
         {
-            if (String.IsNullOrEmpty(term))
-                return null;
-
-            term = term.Trim().ToUpper();
-
-            return _storeDb.Products
-                .Where(x => x.Name.ToUpper().Contains(term))
-                .ToArrayAsync();
+            var query = _storeDb.Products.AsQueryable();
+            if (!String.IsNullOrEmpty(term))
+            {
+                term = term.Trim();
+                 query = query.Where(x => x.Name.Equals(term,StringComparison.CurrentCultureIgnoreCase));
+            }
+            var skip = itemsPerPage * (page - 1);
+            var total = await query.CountAsync();
+            var items = new PagedList<Product>(query.OrderBy(x=>x.Id).Skip(skip)
+                .Take(itemsPerPage),total,itemsPerPage,page);
+            return items;
         }
 
         public Task<int> GetProductsCountAsync(int categoryId)
             => _storeDb.Products.Where(x => x.CategoryId == categoryId).CountAsync();
 
-        public Task<Product[]> GetProductsAsync(int categoryId, int page, int itemsPerPage)
+        public async Task<IPagedList<Product>> GetProductsAsync(int categoryId, int page, int itemsPerPage)
         {
             var skip = itemsPerPage * (page - 1);
-
-            return _storeDb.Products
-                .Where(x => x.CategoryId == categoryId)
-                .Skip(skip)
-                .Take(itemsPerPage)
-                .ToArrayAsync();
+            var query = _storeDb.Products
+                .Where(x => x.CategoryId == categoryId);
+            var total = await query.CountAsync();
+            var items = new PagedList<Product>(query.OrderBy(x=>x.Id).Skip(skip)
+                .Take(itemsPerPage),total,itemsPerPage,page);
+            return items;
         }
 
         public Task<Product> GetProductAsync(int id)

@@ -21,34 +21,18 @@ namespace LegendaryStore.Controllers
 
 
         [HttpGet("search")]
-        public async Task<IActionResult> Search([FromQuery]string term)
+        public async Task<IActionResult> Search([FromQuery]string term,int pageSize = 2, int pageIndex = 1)
         {
-            var result = await _db.SearchProductsAsync(term);
+            var result = await _db.SearchProductsAsync(term,pageIndex,pageSize);
 
             return Ok(result);
         }
 
         [HttpGet("by-category/{categoryId:int}")]
-        public async Task<IActionResult> ByCategory([FromRoute]int categoryId, int page = 1)
+        public async Task<IActionResult> ByCategory([FromRoute]int categoryId, int page = 1, int itemsPerPage = 2)
         {
-            const int itemsPerPage = 2;
-
             var items = await _db.GetProductsAsync(categoryId, page, itemsPerPage);
-            var totalCount = await _db.GetProductsCountAsync(categoryId);
-
-            var result = new ProductsList
-            {
-                Items = items,
-                Paging = new Paging
-                {
-                    ActualPage = page,
-                    TotalItems = totalCount,
-                    TotalPages = (int)Math.Ceiling((double)totalCount / itemsPerPage),
-                    ItemsPage = itemsPerPage
-                }
-            };
-
-            return Ok(result);
+            return Ok(items);
         }
 
         [Authorize(Policy = "FullAccess")]
