@@ -8,8 +8,9 @@ import { SpinnerComponent } from './spinner.component';
 import { ErrorComponent } from './error.component';
 import { AutoCompleteComponent } from './autocomplete.component';
 import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu.component';
-import { ModalComponent } from './modal.component';
 import { RatingBarComponent, RatingStarComponent } from './rating-bar.component';
+import { ModalComponent } from './modal.component';
+import { PagerComponent } from './pager.component';
 import { FileUploadComponent } from './file-upload.component';
 
 import { SafePipe } from './safe.pipe';
@@ -27,8 +28,9 @@ import { SafePipe } from './safe.pipe';
         AutoCompleteComponent,
         TreeMenuItemComponent,
         TreeMenuComponent,
-        ModalComponent,
         RatingBarComponent, RatingStarComponent,
+        ModalComponent,
+        PagerComponent,
         FileUploadComponent,
 
         SafePipe
@@ -43,8 +45,9 @@ import { SafePipe } from './safe.pipe';
         AutoCompleteComponent,
         TreeMenuItemComponent,
         TreeMenuComponent,
-        ModalComponent,
         RatingBarComponent,
+        ModalComponent,
+        PagerComponent,
         FileUploadComponent,
 
         SafePipe
