@@ -71,29 +71,6 @@ export class Comment {
     isDeleted: boolean;
 }
 
-export class Paging {
-    public totalPages: number;
-
-    constructor(
-        public page: number,
-        public totalItems: number,
-        public itemsPerPage: number,
-        totalPages?: number
-    ) {
-        this.totalPages = totalPages ? totalPages : this.totalItems / this.itemsPerPage;
-    }
-
-    public get pages(): number[] {
-        let pages = [];
-        for (let i = 1; i <= this.totalPages; i++) {
-            pages.push(i);
-        }
-        return pages;
-    }
-
-    public static getPaging = (p: Paging) => new Paging(p.page, p.totalItems, p.itemsPerPage, p.totalPages);
-}
-
 export class CartItem {
     constructor(
         public id: number,

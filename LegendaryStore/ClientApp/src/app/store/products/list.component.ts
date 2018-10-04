@@ -35,9 +35,7 @@ export class ProductsListComponent implements OnInit {
             .subscribe(
                 result => {
                     this.items = result.items;
-                    this.paginationInfo = result.paging /*?
-                        Paging.getPaging(result.paging) :
-                        new Paging(1, result.items.length, 10)*/;
+                    this.paginationInfo = result.paging;
                 },
                 error => console.log(error)
             );
@@ -50,14 +48,11 @@ export class ProductsListComponent implements OnInit {
     }
 
     public onPageChanged(value: any): any {
-        event.preventDefault();
         this.paginationInfo.actualPage = value;
         this._products.getProducts(this.categoryId, value).subscribe(
             result => {
                 this.items = result.items;
-                this.paginationInfo = result.paging /*?
-                    Paging.getPaging(result.paging) :
-                    new Paging(1, result.items.length, 10)*/;
+                this.paginationInfo = result.paging;
             },
             error => console.log(error)
         );

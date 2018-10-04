@@ -19,9 +19,10 @@ export interface IPager {
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <!--<li *ngFor="let pageNum of model.pages" [ngClass]="{ active: pageNum === paging.page }">
-                    <a [routerLink]="[]" [queryParams]="{ page: pageNum }">{{ pageNum }}</a>
-                </li>-->
+                <li *ngFor="let pageNum of pages" [class.active]="pageNum === model.actualPage">
+                    <a *ngIf="pageNum === model.actualPage">{{ pageNum }}</a>
+                    <a *ngIf="pageNum !== model.actualPage" (click)="onPageNumberClicked($event, pageNum)">{{ pageNum }}</a>
+                </li>
                 <li>
                     <a (click)="onNextClicked($event)" [class.disabled]="buttonStates?.nextDisabled" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
@@ -45,6 +46,8 @@ export class PagerComponent implements OnChanges  {
     @Input() model: IPager;
     @Output() changed: EventEmitter<number> = new EventEmitter<number>();
 
+    pages: number[];
+
     buttonStates: any = {
         nextDisabled: true,
         previousDisabled: true,
@@ -56,7 +59,17 @@ export class PagerComponent implements OnChanges  {
 
             this.buttonStates.previousDisabled = (this.model.actualPage === 1);
             this.buttonStates.nextDisabled = (this.model.actualPage === this.model.totalPages);
+
+            this.pages = [];
+            for (let i = 1; i <= this.model.totalPages; i++) {
+                this.pages.push(i);
+            }
         }
+    }
+
+    public onPageNumberClicked(event: any, pageNum: number): void {
+        event.preventDefault();
+        this.changed.emit(pageNum);
     }
 
     public onNextClicked(event: any): void {
