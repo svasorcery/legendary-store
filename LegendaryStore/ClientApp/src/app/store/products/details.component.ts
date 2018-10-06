@@ -33,11 +33,7 @@ export class ProductDetailsComponent implements OnInit {
 
     public addToCart() {
         if (!this.value) { return; }
-        this._cart.addItem(this.value.product.id)
-            .subscribe(
-                result => console.log(`${result.product.name} added`),
-                error => console.log(error)
-            );
+        this._cart.addItem(this.value.product.id);
     }
 
     public addToFavorites() {
